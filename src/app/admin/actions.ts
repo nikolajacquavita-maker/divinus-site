@@ -1,0 +1,136 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import type { ProductStatus, ProductUniverse } from "@/lib/types";
+
+export async function login(formData: FormData) {
+  const email = String(formData.get("email") ?? "");
+  const password = String(formData.get("password") ?? "");
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    redirect(`/admin/login?error=${encodeURIComponent(error.message)}`);
+  }
+
+  redirect("/admin");
+}
+
+export async function logout() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/admin/login");
+}
+
+const DIACRITICS = /[̀-ͯ]/g;
+
+function slugify(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(DIACRITICS, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+export async function upsertProduct(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const name = String(formData.get("name") ?? "").trim();
+  const slugInput = String(formData.get("slug") ?? "").trim();
+  const priceRaw = String(formData.get("price") ?? "").trim();
+  const imagesRaw = String(formData.get("images") ?? "").trim();
+  const featuresRaw = String(formData.get("features") ?? "").trim();
+
+  const payload = {
+    name,
+    slug: slugInput ? slugify(slugInput) : slugify(name),
+    universe: String(formData.get("universe")) as ProductUniverse,
+    short_description: String(formData.get("short_description") ?? ""),
+    full_description: String(formData.get("full_description") ?? ""),
+    price: priceRaw ? Number(priceRaw.replace(",", ".")) : null,
+    images: imagesRaw
+      ? imagesRaw.split("\n").map((s) => s.trim()).filter(Boolean)
+      : [],
+    features: featuresRaw
+      ? featuresRaw.split("\n").map((s) => s.trim()).filter(Boolean)
+      : [],
+    lobway_url: String(formData.get("lobway_url") ?? "").trim() || null,
+    status: String(formData.get("status")) as ProductStatus,
+    sort_order: Number(formData.get("sort_order") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("products").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("products").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/produtos");
+  revalidatePath("/produtos");
+  revalidatePath("/");
+  redirect("/admin/produtos");
+}
+
+export async function setProductStatus(id: string, status: ProductStatus) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("products").update({ status }).eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/produtos");
+  revalidatePath("/produtos");
+  revalidatePath("/");
+}
+
+export async function deleteProduct(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/produtos");
+  revalidatePath("/produtos");
+}
+
+export async function upsertMessage(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const payload = {
+    category: String(formData.get("category") ?? ""),
+    verse_text: String(formData.get("verse_text") ?? ""),
+    verse_reference: String(formData.get("verse_reference") ?? ""),
+    reflection: String(formData.get("reflection") ?? ""),
+    practical_action: String(formData.get("practical_action") ?? ""),
+    is_daily: formData.get("is_daily") === "on",
+    is_active: formData.get("is_active") === "on",
+    order_index: Number(formData.get("order_index") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("messages").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("messages").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/mensagens");
+  revalidatePath("/mensagem");
+  revalidatePath("/");
+  redirect("/admin/mensagens");
+}
+
+export async function deleteMessage(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("messages").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/mensagens");
+  revalidatePath("/mensagem");
+}
