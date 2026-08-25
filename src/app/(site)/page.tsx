@@ -69,9 +69,9 @@ export default async function HomePage() {
               "radial-gradient(60% 50% at 50% 20%, oklch(24% 0.02 75 / 0.5), transparent), radial-gradient(80% 60% at 80% 100%, oklch(20% 0.01 60 / 0.6), transparent)",
           }}
         />
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-32 text-center">
-          <h1 className="font-display label-caps text-6xl md:text-7xl">Divinus</h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-20 text-center sm:py-28 md:py-32">
+          <h1 className="font-display label-caps text-5xl sm:text-6xl md:text-7xl">Divinus</h1>
+          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
             A mensagem descomplicada de Deus para você.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -92,7 +92,7 @@ export default async function HomePage() {
       </section>
 
       {/* MOVIMENTO */}
-      <section className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <section className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
         <p className="text-xs label-caps text-accent">Um movimento, não uma loja</p>
         <h2 className="font-display mt-4 text-3xl md:text-4xl">
           A Divinus nasceu para levar a mensagem de Deus para lugares onde muitas
@@ -114,7 +114,7 @@ export default async function HomePage() {
           {UNIVERSES.map((u) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
-              <article key={u.value} className="bg-background px-8 py-14">
+              <article key={u.value} className="bg-background px-6 py-10 sm:px-8 sm:py-14">
                 <p className="text-xs label-caps text-muted-foreground">
                   Universo {u.index}
                 </p>
@@ -143,7 +143,7 @@ export default async function HomePage() {
 
       {/* MENSAGEM DO DIA */}
       <section className="border-t border-border bg-card">
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
           <p className="text-xs label-caps text-accent">Sua mensagem de hoje</p>
           {daily ? (
             <>
@@ -168,9 +168,9 @@ export default async function HomePage() {
 
       {/* HISTÓRIAS REAIS */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-24">
+        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
           <p className="text-center text-xs label-caps text-accent">Histórias reais</p>
-          <h2 className="font-display mx-auto mt-4 max-w-2xl text-center text-3xl">
+          <h2 className="font-display mx-auto mt-4 max-w-2xl text-center text-2xl sm:text-3xl">
             O produto é apenas o meio. O verdadeiro produto é a mensagem.
           </h2>
           <div className="mt-14 grid gap-8 md:grid-cols-3">
@@ -186,7 +186,7 @@ export default async function HomePage() {
 
       {/* PROPÓSITO / QR */}
       <section className="border-t border-border bg-card">
-        <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
           <h2 className="font-display text-3xl">
             Existe um propósito por trás desta peça.
           </h2>

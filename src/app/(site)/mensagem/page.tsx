@@ -19,8 +19,8 @@ export default async function MensagemPage({
   const message = selected ? await getRandomMessageByCategory(selected.value) : null;
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-20">
-      <h1 className="font-display text-4xl">Preciso de uma mensagem</h1>
+    <div className="mx-auto max-w-3xl px-6 py-14 sm:py-20">
+      <h1 className="font-display text-3xl sm:text-4xl">Preciso de uma mensagem</h1>
       <p className="mt-4 text-muted-foreground">
         O que você está enfrentando agora? Escolha uma palavra. Nós não damos
         uma resposta automática — procuramos a mensagem certa para este

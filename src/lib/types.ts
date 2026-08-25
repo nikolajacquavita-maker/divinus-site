@@ -1,5 +1,5 @@
 export type ProductUniverse = "water" | "performance" | "essentials";
-export type ProductStatus = "active" | "paused" | "cancelled";
+export type ProductStatus = "active" | "coming_soon" | "paused" | "cancelled";
 
 export interface Product {
   id: string;

@@ -14,9 +14,9 @@ export default async function ComunidadePage() {
   ]);
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
+    <div className="mx-auto max-w-4xl px-6 py-14 sm:py-20">
       <p className="text-xs label-caps text-accent">Comunidade Divinus</p>
-      <h1 className="font-display mt-4 text-4xl">
+      <h1 className="font-display mt-4 text-3xl sm:text-4xl">
         Não apenas consumir conteúdo. Viver uma transformação.
       </h1>
       <p className="mt-6 text-muted-foreground">

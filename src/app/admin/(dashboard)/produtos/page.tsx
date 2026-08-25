@@ -8,12 +8,14 @@ export const revalidate = 0;
 
 const STATUS_LABEL: Record<ProductStatus, string> = {
   active: "Ativo",
+  coming_soon: "Em breve",
   paused: "Pausado",
   cancelled: "Cancelado",
 };
 
 const STATUS_CLASS: Record<ProductStatus, string> = {
   active: "text-accent border-accent/60",
+  coming_soon: "text-amber-400 border-amber-400/40",
   paused: "text-muted-foreground border-border",
   cancelled: "text-red-400 border-red-400/40",
 };
@@ -88,17 +90,17 @@ export default async function AdminProdutosPage() {
                   </button>
                 </form>
               )}
+              {p.status !== "coming_soon" && (
+                <form action={setProductStatus.bind(null, p.id, "coming_soon")}>
+                  <button className="border border-border px-3 py-1.5 text-xs label-caps hover:border-amber-400 hover:text-amber-400">
+                    Em breve
+                  </button>
+                </form>
+              )}
               {p.status !== "paused" && (
                 <form action={setProductStatus.bind(null, p.id, "paused")}>
                   <button className="border border-border px-3 py-1.5 text-xs label-caps hover:border-accent hover:text-accent">
                     Pausar
-                  </button>
-                </form>
-              )}
-              {p.status !== "cancelled" && (
-                <form action={setProductStatus.bind(null, p.id, "cancelled")}>
-                  <button className="border border-border px-3 py-1.5 text-xs label-caps hover:border-red-400 hover:text-red-400">
-                    Cancelar
                   </button>
                 </form>
               )}

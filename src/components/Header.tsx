@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MobileNav } from "@/components/MobileNav";
 
 const NAV = [
   { href: "/", label: "Início" },
@@ -10,8 +11,8 @@ const NAV = [
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/70 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="font-display text-xl label-caps tracking-widest">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5">
+        <Link href="/" className="font-display text-lg label-caps tracking-widest sm:text-xl">
           Divinus
         </Link>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
@@ -27,6 +28,7 @@ export function Header() {
         >
           Preciso de uma mensagem
         </Link>
+        <MobileNav />
       </div>
     </header>
   );

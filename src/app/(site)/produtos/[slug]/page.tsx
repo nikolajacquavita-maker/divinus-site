@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductBySlug } from "@/lib/data";
 import { UNIVERSES } from "@/lib/types";
+import { ProductGallery } from "@/components/ProductGallery";
 
 export const revalidate = 0;
 
@@ -25,8 +26,9 @@ export default async function ProdutoPage({
   if (!product) notFound();
 
   const universe = UNIVERSES.find((u) => u.value === product.universe);
+  const comingSoon = product.status === "coming_soon";
   const price =
-    product.price != null
+    !comingSoon && product.price != null
       ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
           product.price,
         )
@@ -34,28 +36,19 @@ export default async function ProdutoPage({
 
   return (
     <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2">
-      <div className="grid gap-4">
-        {product.images.length > 0 ? (
-          product.images.map((src) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={src}
-              src={src}
-              alt={product.name}
-              className="aspect-square w-full border border-border object-cover"
-            />
-          ))
-        ) : (
-          <div className="flex aspect-square w-full items-center justify-center border border-border bg-card text-xs label-caps text-muted-foreground">
-            Divinus
-          </div>
-        )}
-      </div>
+      <ProductGallery images={product.images} alt={product.name} />
 
       <div>
-        {universe && (
-          <p className="text-xs label-caps text-muted-foreground">{universe.label}</p>
-        )}
+        <div className="flex items-center gap-3">
+          {universe && (
+            <p className="text-xs label-caps text-muted-foreground">{universe.label}</p>
+          )}
+          {comingSoon && (
+            <span className="border border-accent px-2 py-0.5 text-[10px] label-caps text-accent">
+              Em breve
+            </span>
+          )}
+        </div>
         <h1 className="font-display mt-2 text-4xl">{product.name}</h1>
         <p className="mt-3 text-accent">{product.short_description}</p>
         {price && <p className="mt-6 text-2xl">{price}</p>}
@@ -73,24 +66,26 @@ export default async function ProdutoPage({
         )}
 
         <div className="mt-10">
-          {product.lobway_url ? (
-            <a
-              href={product.lobway_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block border border-accent bg-accent px-8 py-4 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
-            >
-              Comprar na Lobway →
-            </a>
+          {!comingSoon && product.lobway_url ? (
+            <>
+              <a
+                href={product.lobway_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border border-accent bg-accent px-8 py-4 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
+              >
+                Comprar na Lobway →
+              </a>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Você será redirecionado ao site do nosso parceiro Lobway para
+                finalizar a compra com segurança.
+              </p>
+            </>
           ) : (
             <p className="text-xs label-caps text-muted-foreground">
               Em breve disponível para compra
             </p>
           )}
-          <p className="mt-3 text-xs text-muted-foreground">
-            Você será redirecionado ao site do nosso parceiro Lobway para
-            finalizar a compra com segurança.
-          </p>
         </div>
       </div>
     </div>

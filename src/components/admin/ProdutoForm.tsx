@@ -81,9 +81,9 @@ export function ProdutoForm({ product }: { product?: Product }) {
             defaultValue={product?.status ?? "paused"}
             className="admin-input"
           >
-            <option value="active">Ativo</option>
-            <option value="paused">Pausado</option>
-            <option value="cancelled">Cancelado</option>
+            <option value="active">Ativo — à venda</option>
+            <option value="coming_soon">Em breve — visível, sem comprar</option>
+            <option value="paused">Pausado — some do site</option>
           </select>
         </Field>
         <Field label="Ordem de exibição">

@@ -1,12 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Challenge, CommunityEvent, Message, Product, ProductUniverse } from "@/lib/types";
 
+const VISIBLE_STATUSES = ["active", "coming_soon"] as const;
+
 export async function getActiveProducts(): Promise<Product[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("status", "active")
+    .in("status", VISIBLE_STATUSES)
     .order("universe", { ascending: true })
     .order("sort_order", { ascending: true });
 
@@ -24,7 +26,7 @@ export async function getActiveProductsByUniverse(
   const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("status", "active")
+    .in("status", VISIBLE_STATUSES)
     .eq("universe", universe)
     .order("sort_order", { ascending: true });
 
@@ -41,7 +43,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     .from("products")
     .select("*")
     .eq("slug", slug)
-    .eq("status", "active")
+    .in("status", VISIBLE_STATUSES)
     .maybeSingle();
 
   if (error) {
