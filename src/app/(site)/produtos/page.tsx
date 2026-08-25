@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getActiveProductsByUniverse } from "@/lib/data";
+import { getActiveProductsByUniverse, getVisibleUniverses } from "@/lib/data";
 import { UNIVERSES } from "@/lib/types";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -10,13 +10,15 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function ProdutosPage() {
-  const [water, performance, essentials] = await Promise.all([
+  const [water, performance, essentials, visibleUniverses] = await Promise.all([
     getActiveProductsByUniverse("water"),
     getActiveProductsByUniverse("performance"),
     getActiveProductsByUniverse("essentials"),
+    getVisibleUniverses(),
   ]);
 
   const byUniverse = { water, performance, essentials };
+  const universes = UNIVERSES.filter((u) => visibleUniverses.includes(u.value));
 
   return (
     <>
@@ -32,7 +34,7 @@ export default async function ProdutosPage() {
         </div>
       </section>
 
-      {UNIVERSES.map((u, i) => {
+      {universes.map((u, i) => {
         const products = byUniverse[u.value];
         return (
           <section key={u.value} className={i > 0 ? "border-t border-border" : ""}>

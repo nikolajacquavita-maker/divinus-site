@@ -3,6 +3,26 @@ import type { Challenge, CommunityEvent, Message, Product, ProductUniverse } fro
 
 const VISIBLE_STATUSES = ["active", "coming_soon"] as const;
 
+export async function getVisibleUniverses(): Promise<ProductUniverse[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("universe_settings")
+    .select("universe, is_visible");
+
+  if (error || !data) {
+    if (error) console.error("getVisibleUniverses", error);
+    // se a tabela ainda não existir (migration não rodada), mostra todas
+    return ["water", "performance", "essentials"];
+  }
+
+  const hidden = new Set(
+    data.filter((row) => !row.is_visible).map((row) => row.universe),
+  );
+  return (["water", "performance", "essentials"] as ProductUniverse[]).filter(
+    (u) => !hidden.has(u),
+  );
+}
+
 export async function getActiveProducts(): Promise<Product[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -50,7 +70,14 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     console.error("getProductBySlug", error);
     return null;
   }
-  return data as Product | null;
+
+  const product = data as Product | null;
+  if (!product) return null;
+
+  const visibleUniverses = await getVisibleUniverses();
+  if (!visibleUniverses.includes(product.universe)) return null;
+
+  return product;
 }
 
 function dayOfYear(date: Date): number {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getActiveProductsByUniverse, getDailyMessage } from "@/lib/data";
+import { getActiveProductsByUniverse, getDailyMessage, getVisibleUniverses } from "@/lib/data";
 import { UNIVERSES } from "@/lib/types";
 
 const UNIVERSE_COPY: Record<
@@ -45,11 +45,12 @@ const TESTIMONIALS = [
 ];
 
 export default async function HomePage() {
-  const [water, performance, essentials, daily] = await Promise.all([
+  const [water, performance, essentials, daily, visibleUniverses] = await Promise.all([
     getActiveProductsByUniverse("water"),
     getActiveProductsByUniverse("performance"),
     getActiveProductsByUniverse("essentials"),
     getDailyMessage(),
+    getVisibleUniverses(),
   ]);
 
   const counts: Record<string, number> = {
@@ -57,6 +58,8 @@ export default async function HomePage() {
     performance: performance.length,
     essentials: essentials.length,
   };
+
+  const universes = UNIVERSES.filter((u) => visibleUniverses.includes(u.value));
 
   return (
     <>
@@ -109,9 +112,10 @@ export default async function HomePage() {
       </section>
 
       {/* UNIVERSOS */}
+      {universes.length > 0 && (
       <section className="border-t border-border">
         <div className="mx-auto grid max-w-6xl gap-px bg-border md:grid-cols-3">
-          {UNIVERSES.map((u) => {
+          {universes.map((u) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
               <article key={u.value} className="bg-background px-6 py-10 sm:px-8 sm:py-14">
@@ -140,6 +144,7 @@ export default async function HomePage() {
           })}
         </div>
       </section>
+      )}
 
       {/* MENSAGEM DO DIA */}
       <section className="border-t border-border bg-card">

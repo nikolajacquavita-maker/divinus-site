@@ -135,6 +135,19 @@ export async function deleteMessage(id: string) {
   revalidatePath("/mensagem");
 }
 
+export async function setUniverseVisibility(universe: string, isVisible: boolean) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("universe_settings")
+    .update({ is_visible: isVisible })
+    .eq("universe", universe);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/produtos");
+  revalidatePath("/produtos");
+  revalidatePath("/");
+}
+
 export async function upsertChallenge(formData: FormData) {
   const supabase = await createClient();
 
