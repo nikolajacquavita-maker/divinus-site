@@ -135,13 +135,17 @@ export default async function HomePage() {
           {universes.map((u, i) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
-              <article key={u.value} className="bg-background">
+              <Link
+                key={u.value}
+                href="/produtos"
+                className="group block bg-background transition-colors hover:bg-card"
+              >
                 <div className="aspect-[4/3] w-full overflow-hidden bg-card">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={copy.image}
                     alt={u.label}
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="px-6 py-10 sm:px-8 sm:py-14">
@@ -159,14 +163,11 @@ export default async function HomePage() {
                 <p className="mt-6 text-xs text-muted-foreground">
                   {counts[u.value]} produto(s) disponível(is) agora
                 </p>
-                <Link
-                  href="/produtos"
-                  className="mt-6 inline-block text-xs label-caps text-accent hover:underline"
-                >
+                <span className="mt-6 inline-block text-xs label-caps text-accent group-hover:underline">
                   Ver a linha →
-                </Link>
+                </span>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
