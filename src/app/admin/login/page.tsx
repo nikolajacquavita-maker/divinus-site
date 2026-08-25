@@ -1,4 +1,6 @@
+import { redirect } from "next/navigation";
 import { login } from "@/app/admin/actions";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function LoginPage({
   searchParams,
@@ -6,6 +8,14 @@ export default async function LoginPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const { error } = await searchParams;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    redirect("/admin");
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center px-6">
