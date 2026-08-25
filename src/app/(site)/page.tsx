@@ -123,7 +123,15 @@ export default async function HomePage() {
       {/* UNIVERSOS */}
       {universes.length > 0 && (
       <section className="border-t border-border">
-        <div className="mx-auto grid max-w-6xl gap-px bg-border md:grid-cols-3">
+        <div
+          className={`mx-auto grid max-w-6xl gap-px bg-border ${
+            universes.length === 1
+              ? ""
+              : universes.length === 2
+                ? "md:grid-cols-2"
+                : "md:grid-cols-3"
+          }`}
+        >
           {universes.map((u, i) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
