@@ -134,3 +134,70 @@ export async function deleteMessage(id: string) {
   revalidatePath("/admin/mensagens");
   revalidatePath("/mensagem");
 }
+
+export async function upsertChallenge(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const payload = {
+    days: Number(formData.get("days") ?? 0),
+    title: String(formData.get("title") ?? ""),
+    description: String(formData.get("description") ?? ""),
+    is_active: formData.get("is_active") === "on",
+    sort_order: Number(formData.get("sort_order") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("challenges").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("challenges").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/comunidade");
+  revalidatePath("/comunidade");
+  redirect("/admin/comunidade");
+}
+
+export async function deleteChallenge(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("challenges").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/comunidade");
+  revalidatePath("/comunidade");
+}
+
+export async function upsertCommunityEvent(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const payload = {
+    title: String(formData.get("title") ?? ""),
+    description: String(formData.get("description") ?? ""),
+    is_active: formData.get("is_active") === "on",
+    sort_order: Number(formData.get("sort_order") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("community_events").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("community_events").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/comunidade");
+  revalidatePath("/comunidade");
+  redirect("/admin/comunidade");
+}
+
+export async function deleteCommunityEvent(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("community_events").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/comunidade");
+  revalidatePath("/comunidade");
+}

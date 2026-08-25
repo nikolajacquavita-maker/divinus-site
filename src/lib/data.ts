@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Message, Product, ProductUniverse } from "@/lib/types";
+import type { Challenge, CommunityEvent, Message, Product, ProductUniverse } from "@/lib/types";
 
 export async function getActiveProducts(): Promise<Product[]> {
   const supabase = await createClient();
@@ -89,6 +89,36 @@ export async function getMessagesByCategory(category: string): Promise<Message[]
     return [];
   }
   return data as Message[];
+}
+
+export async function getActiveChallenges(): Promise<Challenge[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("challenges")
+    .select("*")
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("getActiveChallenges", error);
+    return [];
+  }
+  return data as Challenge[];
+}
+
+export async function getActiveCommunityEvents(): Promise<CommunityEvent[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("community_events")
+    .select("*")
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("getActiveCommunityEvents", error);
+    return [];
+  }
+  return data as CommunityEvent[];
 }
 
 export async function getRandomMessageByCategory(

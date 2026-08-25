@@ -52,6 +52,12 @@ export default async function AdminDashboard() {
         >
           Gerenciar mensagens
         </Link>
+        <Link
+          href="/admin/comunidade"
+          className="border border-border px-6 py-3 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
+        >
+          Gerenciar comunidade
+        </Link>
       </div>
     </div>
   );

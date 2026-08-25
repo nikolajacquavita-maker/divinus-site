@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import { getActiveChallenges, getActiveCommunityEvents } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Comunidade Divinus — desafios, leitura e encontros",
 };
 
-const CHALLENGES = [
-  { days: 7, title: "Silêncio", description: "Sete dias para desligar o ruído e ouvir o que importa." },
-  { days: 21, title: "Disciplina espiritual", description: "Três semanas de constância: corpo, leitura e oração." },
-  { days: 40, title: "Recomeço", description: "Quarenta dias para reconstruir hábito, direção e identidade." },
-];
+export const revalidate = 0;
 
-export default function ComunidadePage() {
+export default async function ComunidadePage() {
+  const [challenges, events] = await Promise.all([
+    getActiveChallenges(),
+    getActiveCommunityEvents(),
+  ]);
+
   return (
     <div className="mx-auto max-w-4xl px-6 py-20">
       <p className="text-xs label-caps text-accent">Comunidade Divinus</p>
@@ -39,39 +41,35 @@ export default function ComunidadePage() {
 
       <section className="mt-16">
         <h2 className="text-xs label-caps text-muted-foreground">Desafios</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {CHALLENGES.map((c) => (
-            <div key={c.title} className="border border-border p-6">
-              <p className="font-display text-4xl text-accent">{c.days}</p>
-              <h3 className="font-display mt-2 text-xl">{c.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{c.description}</p>
-            </div>
-          ))}
-        </div>
+        {challenges.length === 0 ? (
+          <p className="mt-6 text-sm text-muted-foreground">Em breve.</p>
+        ) : (
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {challenges.map((c) => (
+              <div key={c.id} className="border border-border p-6">
+                <p className="font-display text-4xl text-accent">{c.days}</p>
+                <h3 className="font-display mt-2 text-xl">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{c.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="mt-16">
         <h2 className="text-xs label-caps text-muted-foreground">Encontros e campanhas</h2>
-        <div className="mt-6 space-y-6">
-          <div className="border border-border p-6">
-            <p className="font-display text-xl">Corrida Divinus — Amanhecer</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Domingos, 6h · aberto a todos os ritmos
-            </p>
+        {events.length === 0 ? (
+          <p className="mt-6 text-sm text-muted-foreground">Em breve.</p>
+        ) : (
+          <div className="mt-6 space-y-6">
+            {events.map((e) => (
+              <div key={e.id} className="border border-border p-6">
+                <p className="font-display text-xl">{e.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{e.description}</p>
+              </div>
+            ))}
           </div>
-          <div className="border border-border p-6">
-            <p className="font-display text-xl">Encontro presencial</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Último sábado do mês · conversa e café
-            </p>
-          </div>
-          <div className="border border-border p-6">
-            <p className="font-display text-xl">Campanha solidária</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Cada pack Jornada apoia distribuição de água
-            </p>
-          </div>
-        </div>
+        )}
       </section>
     </div>
   );

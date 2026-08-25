@@ -18,6 +18,25 @@ export interface Product {
   updated_at: string;
 }
 
+export interface Challenge {
+  id: string;
+  days: number;
+  title: string;
+  description: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface CommunityEvent {
+  id: string;
+  title: string;
+  description: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface Message {
   id: string;
   category: string;
