@@ -4,25 +4,28 @@ import { UNIVERSES } from "@/lib/types";
 
 const UNIVERSE_COPY: Record<
   string,
-  { tagline: string; description: string; features: string[] }
+  { tagline: string; description: string; features: string[]; image: string }
 > = {
   water: {
     tagline: "Uma mensagem em cada lata.",
     description:
       "Água mineral com e sem gás em embalagens premium. Cada unidade carrega uma frase, um versículo e um QR Code que leva a uma reflexão específica — nunca à página inicial.",
     features: ["Com gás", "Sem gás", "Edições de campanha", "QR único por mensagem"],
+    image: "/images/water-lata-cruz.jpg",
   },
   performance: {
     tagline: "Seu corpo corre. Seu espírito conduz.",
     description:
       "A linha que conecta desempenho e fé. Peças minimalistas, detalhes refletivos e frases posicionadas de forma estratégica.",
     features: ["Camisetas técnicas", "Manga longa", "Bonés e acessórios", "Eletrólitos e creatina em dose individual"],
+    image: "/images/performance-corredor.jpg",
   },
   essentials: {
     tagline: "A mensagem na rotina.",
     description:
       "Peças para o dia comum. Cada produto tem uma história e um significado, não apenas uma descrição técnica.",
     features: ["Camisetas e moletons", "Garrafas", "Quadros e devocionais", "Edições especiais"],
+    image: "/images/essentials-camiseta-garrafa.jpg",
   },
 };
 
@@ -65,14 +68,20 @@ export default async function HomePage() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-corredor-estrada.jpg"
+          alt="Corredor solitário ao amanhecer em uma estrada litorânea"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
         <div
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(60% 50% at 50% 20%, oklch(24% 0.02 75 / 0.5), transparent), radial-gradient(80% 60% at 80% 100%, oklch(20% 0.01 60 / 0.6), transparent)",
+              "linear-gradient(180deg, oklch(14.5% 0.004 60 / 0.55) 0%, oklch(14.5% 0.004 60 / 0.75) 55%, oklch(14.5% 0.004 60 / 0.95) 100%)",
           }}
         />
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-20 text-center sm:py-28 md:py-32">
+        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-28 text-center sm:py-36 md:py-44">
           <h1 className="font-display label-caps text-5xl sm:text-6xl md:text-7xl">Divinus</h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
             A mensagem descomplicada de Deus para você.
@@ -118,7 +127,16 @@ export default async function HomePage() {
           {universes.map((u, i) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
-              <article key={u.value} className="bg-background px-6 py-10 sm:px-8 sm:py-14">
+              <article key={u.value} className="bg-background">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-card">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={copy.image}
+                    alt={u.label}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+                <div className="px-6 py-10 sm:px-8 sm:py-14">
                 <p className="text-xs label-caps text-muted-foreground">
                   Universo {String(i + 1).padStart(2, "0")}
                 </p>
@@ -139,6 +157,7 @@ export default async function HomePage() {
                 >
                   Ver a linha →
                 </Link>
+                </div>
               </article>
             );
           })}
