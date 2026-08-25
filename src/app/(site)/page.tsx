@@ -115,12 +115,12 @@ export default async function HomePage() {
       {universes.length > 0 && (
       <section className="border-t border-border">
         <div className="mx-auto grid max-w-6xl gap-px bg-border md:grid-cols-3">
-          {universes.map((u) => {
+          {universes.map((u, i) => {
             const copy = UNIVERSE_COPY[u.value];
             return (
               <article key={u.value} className="bg-background px-6 py-10 sm:px-8 sm:py-14">
                 <p className="text-xs label-caps text-muted-foreground">
-                  Universo {u.index}
+                  Universo {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="font-display mt-3 text-2xl">{u.label}</h3>
                 <p className="mt-2 text-accent">{copy.tagline}</p>

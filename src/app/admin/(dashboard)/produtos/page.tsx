@@ -48,28 +48,50 @@ export default async function AdminProdutosPage() {
         </Link>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 border border-border p-5">
         <p className="text-xs label-caps text-muted-foreground">
           Visibilidade das linhas no site
         </p>
-        <div className="mt-3 flex flex-wrap gap-3">
+        <div className="mt-4 space-y-3">
           {UNIVERSES.map((u) => {
             const isVisible = visibleMap.get(u.value) ?? true;
             return (
-              <form key={u.value} action={setUniverseVisibility.bind(null, u.value, !isVisible)}>
+              <form
+                key={u.value}
+                action={setUniverseVisibility.bind(null, u.value, !isVisible)}
+                className="flex items-center justify-between gap-4"
+              >
+                <span className="text-sm">{u.label}</span>
                 <button
-                  className={`border px-4 py-2 text-xs label-caps transition-colors ${
-                    isVisible
-                      ? "border-accent/60 text-accent"
-                      : "border-border text-muted-foreground"
-                  }`}
+                  type="submit"
+                  aria-pressed={isVisible}
+                  aria-label={`${isVisible ? "Esconder" : "Mostrar"} ${u.label} no site`}
+                  className="group flex items-center gap-3 text-xs label-caps"
                 >
-                  {u.label} · {isVisible ? "Visível ↗ clique pra esconder" : "Escondida ↗ clique pra mostrar"}
+                  <span className={isVisible ? "text-accent" : "text-muted-foreground"}>
+                    {isVisible ? "Visível" : "Escondida"}
+                  </span>
+                  <span
+                    className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${
+                      isVisible ? "border-accent bg-accent/30" : "border-border bg-card"
+                    }`}
+                  >
+                    <span
+                      className={`absolute top-0.5 h-4 w-4 rounded-full transition-all ${
+                        isVisible
+                          ? "left-[calc(100%-1.25rem)] bg-accent"
+                          : "left-0.5 bg-muted-foreground"
+                      }`}
+                    />
+                  </span>
                 </button>
               </form>
             );
           })}
         </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Clique no interruptor pra esconder ou mostrar a linha inteira no site.
+        </p>
       </div>
 
       {error && <p className="mt-6 text-sm text-red-400">Erro: {error.message}</p>}

@@ -39,7 +39,9 @@ export default async function ProdutosPage() {
         return (
           <section key={u.value} className={i > 0 ? "border-t border-border" : ""}>
             <div className="mx-auto max-w-6xl px-6 py-16">
-              <p className="text-xs label-caps text-muted-foreground">Linha {u.index}</p>
+              <p className="text-xs label-caps text-muted-foreground">
+                Linha {String(i + 1).padStart(2, "0")}
+              </p>
               <h2 className="font-display mt-2 text-3xl">{u.label}</h2>
               {products.length === 0 ? (
                 <p className="mt-8 text-sm text-muted-foreground">
