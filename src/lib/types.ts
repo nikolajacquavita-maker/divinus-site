@@ -99,6 +99,14 @@ export interface Feeling {
   acao_text: string;
   acao_video_url: string | null;
   acao_cta_label: string;
+  biblico_nome: string;
+  biblico_referencia: string;
+  biblico_versiculo: string;
+  biblico_teaser: string;
+  biblico_contexto: string;
+  biblico_capitulo: string;
+  biblico_aplicacao: string;
+  biblico_conexao: string;
   is_active: boolean;
   sort_order: number;
   created_at: string;

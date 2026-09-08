@@ -42,6 +42,20 @@ export default async function SentimentoPage({
       <p className="mt-8 text-xs label-caps text-accent">{feeling.title}</p>
       <h1 className="font-display mt-2 text-3xl sm:text-4xl">{feeling.teaser}</h1>
 
+      <Link
+        href={`/sentimentos/${feeling.slug}/leitura`}
+        className="group mt-10 block border border-border p-6 transition-colors hover:border-accent sm:p-8"
+      >
+        <p className="text-xs label-caps text-muted-foreground">
+          Na Bíblia · {feeling.biblico_nome} — {feeling.biblico_referencia}
+        </p>
+        <p className="font-display mt-3 text-xl sm:text-2xl">«{feeling.biblico_versiculo}»</p>
+        <p className="mt-4 text-sm text-muted-foreground">{feeling.biblico_teaser}</p>
+        <span className="mt-4 inline-block text-xs label-caps text-accent group-hover:underline">
+          Aprofundar nessa passagem →
+        </span>
+      </Link>
+
       <div>
         <StageBlock
           index="01"

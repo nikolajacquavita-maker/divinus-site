@@ -36,6 +36,93 @@ export function SentimentoForm({ feeling }: { feeling?: Feeling }) {
         <textarea name="teaser" defaultValue={feeling?.teaser} rows={2} required className="admin-input" />
       </Field>
 
+      <div className="border border-border p-5">
+        <p className="text-xs label-caps text-accent">Fundamentação bíblica (Leitura Dinâmica)</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Aparece antes do bloco &ldquo;01 · Corpo&rdquo; na página, e leva à página de
+          aprofundamento com os 4 passos do método.
+        </p>
+        <div className="mt-4 grid gap-6 sm:grid-cols-2">
+          <Field label="Pessoa / momento bíblico" hint='ex.: "Elias no deserto"'>
+            <input name="biblico_nome" defaultValue={feeling?.biblico_nome} required className="admin-input" />
+          </Field>
+          <Field label="Referência" hint='ex.: "1 Reis 19:1-18"'>
+            <input
+              name="biblico_referencia"
+              defaultValue={feeling?.biblico_referencia}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="Versículo (citação)">
+            <textarea
+              name="biblico_versiculo"
+              defaultValue={feeling?.biblico_versiculo}
+              rows={2}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="Teaser" hint="Frase curta mostrada na página principal do sentimento">
+            <textarea
+              name="biblico_teaser"
+              defaultValue={feeling?.biblico_teaser}
+              rows={2}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="1 · Contexto histórico">
+            <textarea
+              name="biblico_contexto"
+              defaultValue={feeling?.biblico_contexto}
+              rows={3}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="2 · O capítulo" hint="O passo mais extenso — narre o capítulo completo com o máximo de embasamento possível">
+            <textarea
+              name="biblico_capitulo"
+              defaultValue={feeling?.biblico_capitulo}
+              rows={8}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="3 · Aplicação prática">
+            <textarea
+              name="biblico_aplicacao"
+              defaultValue={feeling?.biblico_aplicacao}
+              rows={3}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+        <div className="mt-4">
+          <Field label="4 · Conexão com outras passagens">
+            <textarea
+              name="biblico_conexao"
+              defaultValue={feeling?.biblico_conexao}
+              rows={3}
+              required
+              className="admin-input"
+            />
+          </Field>
+        </div>
+      </div>
+
       <Stage
         title="01 · Corpo"
         prefix="corpo"
