@@ -172,6 +172,22 @@ export async function getRandomHeroMessage(): Promise<HeroMessage | null> {
   return data[Math.floor(Math.random() * data.length)] as HeroMessage;
 }
 
+export async function getHeroMessageBySlug(slug: string): Promise<HeroMessage | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("hero_messages")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_active", true)
+    .maybeSingle();
+
+  if (error) {
+    console.error("getHeroMessageBySlug", error);
+    return null;
+  }
+  return data as HeroMessage | null;
+}
+
 export async function getActiveFeelings(): Promise<Feeling[]> {
   const supabase = await createClient();
   const { data, error } = await supabase

@@ -12,6 +12,30 @@ export function HeroMessageForm({ message }: { message?: HeroMessage }) {
         <textarea name="text" defaultValue={message?.text} rows={3} required className="admin-input" />
       </Field>
 
+      <Field label="Referência" hint='ex.: "Gênesis 1" — usada só na página de leitura, não aparece na home'>
+        <input name="reference" defaultValue={message?.reference} required className="admin-input" />
+      </Field>
+
+      <Field label="Slug" hint="usado na URL /leitura/slug">
+        <input name="slug" defaultValue={message?.slug} required className="admin-input" />
+      </Field>
+
+      <Field label="Contexto" hint="Quem escreveu, quando, para quem, por quê">
+        <textarea name="contexto" defaultValue={message?.contexto} rows={3} required className="admin-input" />
+      </Field>
+
+      <Field label="O capítulo" hint="O que a passagem/capítulo completo ensina, não só o versículo isolado">
+        <textarea name="capitulo" defaultValue={message?.capitulo} rows={3} required className="admin-input" />
+      </Field>
+
+      <Field label="Aplicação" hint="Reflexão prática para a vida de quem está lendo">
+        <textarea name="aplicacao" defaultValue={message?.aplicacao} rows={3} required className="admin-input" />
+      </Field>
+
+      <Field label="Conexão" hint="Outra passagem ou história relacionada, no espírito do Bible Study">
+        <textarea name="conexao" defaultValue={message?.conexao} rows={3} required className="admin-input" />
+      </Field>
+
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
         <Field label="Ordem">
           <input

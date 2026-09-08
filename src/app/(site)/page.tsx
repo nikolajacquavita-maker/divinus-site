@@ -85,23 +85,34 @@ export default async function HomePage() {
         />
         <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-28 text-center text-deep-foreground sm:py-36 md:py-44">
           <h1 className="font-display label-caps text-5xl sm:text-6xl md:text-7xl">Divinus</h1>
-          <p className="mt-8 max-w-xl text-base text-deep-foreground/85 sm:text-lg">
-            {heroMessage?.text ?? "Você não recebeu esta mensagem por acaso."}
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          {heroMessage ? (
             <Link
-              href="/sentimentos"
-              className="border border-sand px-6 py-3 text-xs label-caps text-sand hover:bg-sand hover:text-deep transition-colors"
+              href={`/leitura/${heroMessage.slug}`}
+              className="group mt-8 max-w-xl"
             >
-              Conheça a mensagem
+              <p className="text-base text-deep-foreground/85 underline decoration-deep-foreground/30 underline-offset-4 transition-colors group-hover:text-deep-foreground group-hover:decoration-deep-foreground sm:text-lg">
+                {heroMessage.text}
+              </p>
             </Link>
-            <Link
-              href="/produtos"
-              className="border border-deep-foreground/30 px-6 py-3 text-xs label-caps text-deep-foreground/90 hover:border-deep-foreground transition-colors"
-            >
-              Explore os produtos
-            </Link>
-          </div>
+          ) : (
+            <p className="mt-8 max-w-xl text-base text-deep-foreground/85 sm:text-lg">
+              Você não recebeu esta mensagem por acaso.
+            </p>
+          )}
+
+          <Link
+            href="/sentimentos"
+            className="mt-8 text-xs label-caps text-sand hover:text-sand/80 transition-colors"
+          >
+            Você não precisa correr sozinho →
+          </Link>
+
+          <Link
+            href="/produtos"
+            className="mt-10 border border-deep-foreground/30 px-6 py-3 text-xs label-caps text-deep-foreground/90 hover:border-deep-foreground transition-colors"
+          >
+            Explore os produtos
+          </Link>
         </div>
       </section>
 

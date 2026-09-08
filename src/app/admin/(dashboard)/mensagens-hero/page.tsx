@@ -39,7 +39,10 @@ export default async function AdminHeroMessagesPage() {
         )}
         {messages.map((m) => (
           <div key={m.id} className="flex flex-wrap items-center gap-4 p-4">
-            <p className="min-w-[240px] flex-1 text-sm">{m.text}</p>
+            <div className="min-w-[240px] flex-1">
+              <p className="text-xs label-caps text-muted-foreground">{m.reference}</p>
+              <p className="text-sm">{m.text}</p>
+            </div>
             {!m.is_active && (
               <span className="border border-border px-2 py-0.5 text-xs label-caps text-muted-foreground">
                 Inativa

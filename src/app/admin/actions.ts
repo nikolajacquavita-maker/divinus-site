@@ -194,8 +194,15 @@ export async function upsertHeroMessage(formData: FormData) {
   const supabase = await createClient();
 
   const id = String(formData.get("id") ?? "") || null;
+  const slugInput = String(formData.get("slug") ?? "").trim();
   const payload = {
     text: String(formData.get("text") ?? "").trim(),
+    slug: slugify(slugInput),
+    reference: String(formData.get("reference") ?? "").trim(),
+    contexto: String(formData.get("contexto") ?? "").trim(),
+    capitulo: String(formData.get("capitulo") ?? "").trim(),
+    aplicacao: String(formData.get("aplicacao") ?? "").trim(),
+    conexao: String(formData.get("conexao") ?? "").trim(),
     is_active: formData.get("is_active") === "on",
     sort_order: Number(formData.get("sort_order") ?? 0),
   };

@@ -40,6 +40,12 @@ export interface CommunityEvent {
 export interface HeroMessage {
   id: string;
   text: string;
+  slug: string;
+  reference: string;
+  contexto: string;
+  capitulo: string;
+  aplicacao: string;
+  conexao: string;
   is_active: boolean;
   sort_order: number;
   created_at: string;
