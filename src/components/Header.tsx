@@ -4,6 +4,7 @@ import { MobileNav } from "@/components/MobileNav";
 const NAV = [
   { href: "/", label: "Início" },
   { href: "/produtos", label: "Produtos" },
+  { href: "/sentimentos", label: "Sentimentos" },
   { href: "/mensagem", label: "Mensagem" },
   { href: "/comunidade", label: "Comunidade" },
 ];

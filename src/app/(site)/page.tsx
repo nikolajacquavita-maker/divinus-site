@@ -81,21 +81,21 @@ export default async function HomePage() {
               "linear-gradient(180deg, oklch(14.5% 0.004 60 / 0.55) 0%, oklch(14.5% 0.004 60 / 0.75) 55%, oklch(14.5% 0.004 60 / 0.95) 100%)",
           }}
         />
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-28 text-center sm:py-36 md:py-44">
+        <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-28 text-center text-deep-foreground sm:py-36 md:py-44">
           <h1 className="font-display label-caps text-5xl sm:text-6xl md:text-7xl">Divinus</h1>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
+          <p className="mt-6 max-w-xl text-base text-deep-foreground/75 sm:text-lg">
             A mensagem descomplicada de Deus para você.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/mensagem"
-              className="border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+              className="border border-sand px-6 py-3 text-xs label-caps text-sand hover:bg-sand hover:text-deep transition-colors"
             >
               Conheça a mensagem
             </Link>
             <Link
               href="/produtos"
-              className="border border-border px-6 py-3 text-xs label-caps text-foreground hover:border-foreground transition-colors"
+              className="border border-deep-foreground/30 px-6 py-3 text-xs label-caps text-deep-foreground/90 hover:border-deep-foreground transition-colors"
             >
               Explore os produtos
             </Link>
@@ -173,6 +173,23 @@ export default async function HomePage() {
         </div>
       </section>
       )}
+
+      {/* SENTIMENTOS */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
+          <p className="text-xs label-caps text-accent">O que você está sentindo hoje?</p>
+          <h2 className="font-display mt-4 text-3xl md:text-4xl">
+            Ansiedade, luto, culpa, propósito. Escolha o que pesa de verdade —
+            e leia algo pensado pro seu corpo, sua mente e seu espírito.
+          </h2>
+          <Link
+            href="/sentimentos"
+            className="mt-8 inline-block border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            Encontrar meu sentimento
+          </Link>
+        </div>
+      </section>
 
       {/* MENSAGEM DO DIA */}
       <section className="border-t border-border bg-card">

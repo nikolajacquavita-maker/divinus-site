@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import type { ProductStatus, ProductUniverse } from "@/lib/types";
+import type { FeelingCategory, ProductStatus, ProductUniverse } from "@/lib/types";
 
 export async function login(formData: FormData) {
   const email = String(formData.get("email") ?? "");
@@ -133,6 +133,61 @@ export async function deleteMessage(id: string) {
 
   revalidatePath("/admin/mensagens");
   revalidatePath("/mensagem");
+}
+
+export async function upsertFeeling(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const slugInput = String(formData.get("slug") ?? "").trim();
+  const field = (name: string) => String(formData.get(name) ?? "").trim();
+  const optionalField = (name: string) => field(name) || null;
+
+  const payload = {
+    slug: slugify(slugInput),
+    category: String(formData.get("category")) as FeelingCategory,
+    title: field("title"),
+    teaser: field("teaser"),
+    corpo_question: field("corpo_question"),
+    corpo_text: field("corpo_text"),
+    corpo_video_url: optionalField("corpo_video_url"),
+    mente_question: field("mente_question"),
+    mente_text: field("mente_text"),
+    mente_video_url: optionalField("mente_video_url"),
+    espirito_question: field("espirito_question"),
+    espirito_text: field("espirito_text"),
+    espirito_video_url: optionalField("espirito_video_url"),
+    verse_text: field("verse_text"),
+    verse_reference: field("verse_reference"),
+    acao_question: field("acao_question"),
+    acao_text: field("acao_text"),
+    acao_video_url: optionalField("acao_video_url"),
+    acao_cta_label: field("acao_cta_label") || "Eu aceito o desafio",
+    is_active: formData.get("is_active") === "on",
+    sort_order: Number(formData.get("sort_order") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("feelings").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("feelings").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/sentimentos");
+  revalidatePath("/sentimentos");
+  revalidatePath("/");
+  redirect("/admin/sentimentos");
+}
+
+export async function deleteFeeling(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("feelings").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/sentimentos");
+  revalidatePath("/sentimentos");
 }
 
 export async function setUniverseVisibility(universe: string, isVisible: boolean) {

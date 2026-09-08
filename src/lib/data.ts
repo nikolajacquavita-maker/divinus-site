@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Challenge, CommunityEvent, Message, Product, ProductUniverse } from "@/lib/types";
+import type { Challenge, CommunityEvent, Feeling, Message, Product, ProductUniverse } from "@/lib/types";
 
 const VISIBLE_STATUSES = ["active", "coming_soon"] as const;
 
@@ -156,4 +156,43 @@ export async function getRandomMessageByCategory(
   const messages = await getMessagesByCategory(category);
   if (messages.length === 0) return null;
   return messages[Math.floor(Math.random() * messages.length)];
+}
+
+export async function getActiveFeelings(): Promise<Feeling[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("feelings")
+    .select("*")
+    .eq("is_active", true)
+    .order("category", { ascending: true })
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("getActiveFeelings", error);
+    return [];
+  }
+  return data as Feeling[];
+}
+
+export async function getFeelingBySlug(slug: string): Promise<Feeling | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("feelings")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_active", true)
+    .maybeSingle();
+
+  if (error) {
+    console.error("getFeelingBySlug", error);
+    return null;
+  }
+  return data as Feeling | null;
+}
+
+export async function getRandomOtherFeeling(excludeSlug: string): Promise<Feeling | null> {
+  const feelings = await getActiveFeelings();
+  const others = feelings.filter((f) => f.slug !== excludeSlug);
+  if (others.length === 0) return null;
+  return others[Math.floor(Math.random() * others.length)];
 }

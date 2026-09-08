@@ -1,15 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: oklch(14.5% 0.004 60);
-  --foreground: oklch(96.5% 0.004 90);
-  --card: oklch(18.5% 0.004 60);
-  --card-foreground: oklch(96.5% 0.004 90);
-  --muted: oklch(24% 0.005 70);
-  --muted-foreground: oklch(68% 0.008 80);
-  --accent: oklch(83% 0.035 75);
-  --accent-foreground: oklch(14.5% 0.004 60);
-  --border: oklch(100% 0 0 / 0.12);
+  --background: oklch(98.5% 0.005 85);
+  --foreground: oklch(28% 0.008 70);
+  --card: oklch(97.5% 0.006 85);
+  --card-foreground: oklch(28% 0.008 70);
+  --muted: oklch(94.5% 0.01 80);
+  --muted-foreground: oklch(55% 0.012 70);
+  --accent: oklch(32% 0.008 70);
+  --accent-foreground: oklch(98.5% 0.005 85);
+  --border: oklch(90% 0.008 80);
+  --ring: oklch(72% 0.01 75);
+  --sand: oklch(93% 0.018 78);
+  --mineral: oklch(72% 0.006 75);
+  --deep: oklch(24.5% 0.008 70);
+  --deep-foreground: oklch(95% 0.006 85);
 }
 
 @theme inline {
@@ -22,8 +27,13 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border);
-  --font-serif: var(--font-instrument-serif);
-  --font-sans: var(--font-work-sans);
+  --color-ring: var(--ring);
+  --color-sand: var(--sand);
+  --color-mineral: var(--mineral);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
+  --font-serif: var(--font-display-serif);
+  --font-sans: var(--font-display-sans);
 }
 
 body {

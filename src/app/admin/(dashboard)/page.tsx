@@ -6,7 +6,7 @@ export const revalidate = 0;
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  const [{ count: productsCount }, { count: activeCount }, { count: messagesCount }] =
+  const [{ count: productsCount }, { count: activeCount }, { count: messagesCount }, { count: feelingsCount }] =
     await Promise.all([
       supabase.from("products").select("*", { count: "exact", head: true }),
       supabase
@@ -14,6 +14,7 @@ export default async function AdminDashboard() {
         .select("*", { count: "exact", head: true })
         .eq("status", "active"),
       supabase.from("messages").select("*", { count: "exact", head: true }),
+      supabase.from("feelings").select("*", { count: "exact", head: true }),
     ]);
 
   return (
@@ -24,7 +25,7 @@ export default async function AdminDashboard() {
         mensagens do site.
       </p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-4">
         <div className="border border-border p-6">
           <p className="text-xs label-caps text-muted-foreground">Produtos</p>
           <p className="font-display mt-2 text-4xl">{productsCount ?? 0}</p>
@@ -37,6 +38,10 @@ export default async function AdminDashboard() {
           <p className="text-xs label-caps text-muted-foreground">Mensagens</p>
           <p className="font-display mt-2 text-4xl">{messagesCount ?? 0}</p>
         </div>
+        <div className="border border-border p-6">
+          <p className="text-xs label-caps text-muted-foreground">Sentimentos</p>
+          <p className="font-display mt-2 text-4xl">{feelingsCount ?? 0}</p>
+        </div>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-4">
@@ -45,6 +50,12 @@ export default async function AdminDashboard() {
           className="border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
         >
           Gerenciar produtos
+        </Link>
+        <Link
+          href="/admin/sentimentos"
+          className="border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
+          Gerenciar sentimentos
         </Link>
         <Link
           href="/admin/mensagens"

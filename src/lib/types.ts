@@ -56,6 +56,57 @@ export const UNIVERSES: { value: ProductUniverse; label: string; index: string }
   { value: "essentials", label: "Divinus Essentials", index: "03" },
 ];
 
+export type FeelingCategory =
+  | "ansiedade_medo"
+  | "perdas"
+  | "relacoes"
+  | "proposito_acao"
+  | "voce_consigo_mesmo";
+
+export interface Feeling {
+  id: string;
+  slug: string;
+  category: FeelingCategory;
+  title: string;
+  teaser: string;
+  corpo_question: string;
+  corpo_text: string;
+  corpo_video_url: string | null;
+  mente_question: string;
+  mente_text: string;
+  mente_video_url: string | null;
+  espirito_question: string;
+  espirito_text: string;
+  espirito_video_url: string | null;
+  verse_text: string;
+  verse_reference: string;
+  acao_question: string;
+  acao_text: string;
+  acao_video_url: string | null;
+  acao_cta_label: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export const FEELING_CATEGORIES: { value: FeelingCategory; label: string }[] = [
+  { value: "ansiedade_medo", label: "Ansiedade e medo" },
+  { value: "perdas", label: "Perdas" },
+  { value: "relacoes", label: "Relações" },
+  { value: "proposito_acao", label: "Propósito e ação" },
+  { value: "voce_consigo_mesmo", label: "Você consigo mesmo" },
+];
+
+export const FEELING_STAGES = [
+  { value: "corpo", label: "Corpo", index: "01" },
+  { value: "mente", label: "Mente", index: "02" },
+  { value: "espirito", label: "Espírito", index: "03" },
+  { value: "acao", label: "Ação", index: "04" },
+] as const;
+
+export type FeelingStage = (typeof FEELING_STAGES)[number]["value"];
+
 export const MESSAGE_CATEGORIES: { value: string; label: string }[] = [
   { value: "ansiedade", label: "Ansiedade" },
   { value: "medo", label: "Medo" },
