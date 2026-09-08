@@ -18,12 +18,12 @@ export function ProductGallery({ images, alt }: { images: string[]; alt: string 
 
   return (
     <div>
-      <div className="relative aspect-square w-full overflow-hidden border border-border bg-card">
+      <div className="relative w-full border border-border bg-card">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={images[index]}
           alt={`${alt} — foto ${index + 1} de ${images.length}`}
-          className="h-full w-full object-cover"
+          className="w-full h-auto"
         />
 
         {images.length > 1 && (
