@@ -229,9 +229,7 @@ export default async function HomePage() {
             Existe um propósito por trás desta peça.
           </h2>
           <p className="mt-6 text-muted-foreground">
-            Toda lata, etiqueta e embalagem traz um QR Code que leva de volta ao
-            significado daquela coleção. O físico abre o digital, e o digital
-            devolve sentido ao físico.
+            O físico abre o digital, e o digital devolve sentido ao físico.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs label-caps text-muted-foreground">
             <span>Produto</span>
