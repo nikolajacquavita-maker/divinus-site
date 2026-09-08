@@ -55,6 +55,18 @@ export default async function ProdutosPage() {
                   ))}
                 </div>
               )}
+
+              {u.value === "performance" && (
+                <div className="mt-12 border border-border p-6 sm:p-8">
+                  <p className="text-xs label-caps text-accent">Lançamento em breve</p>
+                  <p className="font-display mt-3 text-xl sm:text-2xl">Coleção 27 Estados</p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    Uma camiseta para cada estado brasileiro — cada uma com sua
+                    própria cor e data de lançamento, pensada a partir do que
+                    mais faz sentido pra história e a fé de cada região.
+                  </p>
+                </div>
+              )}
             </div>
           </section>
         );
