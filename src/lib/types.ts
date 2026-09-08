@@ -37,6 +37,15 @@ export interface CommunityEvent {
   created_at: string;
 }
 
+export interface HeroMessage {
+  id: string;
+  text: string;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Message {
   id: string;
   category: string;

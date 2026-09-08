@@ -11,24 +11,23 @@ const NAV = [
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/70 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5">
+      <div className="mx-auto grid max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-5 sm:px-6">
         <Link href="/" className="font-display text-lg label-caps tracking-widest sm:text-xl">
           Divinus
         </Link>
-        <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+        <nav className="hidden items-center justify-center gap-10 text-sm text-muted-foreground md:flex">
           {NAV.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-foreground transition-colors">
               {item.label}
             </Link>
           ))}
         </nav>
-        <Link
-          href="/sentimentos"
-          className="hidden rounded-none border border-accent/60 px-4 py-2 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors md:inline-block"
-        >
-          Preciso de uma mensagem
-        </Link>
-        <MobileNav />
+        <div className="flex justify-end">
+          <span aria-hidden className="invisible hidden font-display text-lg label-caps tracking-widest sm:text-xl md:block">
+            Divinus
+          </span>
+          <MobileNav />
+        </div>
       </div>
     </header>
   );

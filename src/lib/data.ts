@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Challenge, CommunityEvent, Feeling, Message, Product, ProductUniverse } from "@/lib/types";
+import type { Challenge, CommunityEvent, Feeling, HeroMessage, Message, Product, ProductUniverse } from "@/lib/types";
 
 const VISIBLE_STATUSES = ["active", "coming_soon"] as const;
 
@@ -156,6 +156,20 @@ export async function getRandomMessageByCategory(
   const messages = await getMessagesByCategory(category);
   if (messages.length === 0) return null;
   return messages[Math.floor(Math.random() * messages.length)];
+}
+
+export async function getRandomHeroMessage(): Promise<HeroMessage | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("hero_messages")
+    .select("*")
+    .eq("is_active", true);
+
+  if (error || !data || data.length === 0) {
+    if (error) console.error("getRandomHeroMessage", error);
+    return null;
+  }
+  return data[Math.floor(Math.random() * data.length)] as HeroMessage;
 }
 
 export async function getActiveFeelings(): Promise<Feeling[]> {

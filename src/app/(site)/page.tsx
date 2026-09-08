@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { getActiveProductsByUniverse, getDailyMessage, getVisibleUniverses } from "@/lib/data";
+import { getActiveProductsByUniverse, getRandomHeroMessage, getVisibleUniverses } from "@/lib/data";
 import { UNIVERSES } from "@/lib/types";
+
+export const revalidate = 0;
 
 const UNIVERSE_COPY: Record<
   string,
@@ -48,11 +50,11 @@ const TESTIMONIALS = [
 ];
 
 export default async function HomePage() {
-  const [water, performance, essentials, daily, visibleUniverses] = await Promise.all([
+  const [water, performance, essentials, heroMessage, visibleUniverses] = await Promise.all([
     getActiveProductsByUniverse("water"),
     getActiveProductsByUniverse("performance"),
     getActiveProductsByUniverse("essentials"),
-    getDailyMessage(),
+    getRandomHeroMessage(),
     getVisibleUniverses(),
   ]);
 
@@ -83,8 +85,8 @@ export default async function HomePage() {
         />
         <div className="mx-auto flex max-w-4xl flex-col items-center px-6 py-28 text-center text-deep-foreground sm:py-36 md:py-44">
           <h1 className="font-display label-caps text-5xl sm:text-6xl md:text-7xl">Divinus</h1>
-          <p className="mt-6 max-w-xl text-base text-deep-foreground/75 sm:text-lg">
-            A mensagem descomplicada de Deus para você.
+          <p className="mt-8 max-w-xl text-base text-deep-foreground/85 sm:text-lg">
+            {heroMessage?.text ?? "Você não recebeu esta mensagem por acaso."}
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -187,31 +189,6 @@ export default async function HomePage() {
             className="mt-8 inline-block border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
           >
             Encontrar meu sentimento
-          </Link>
-        </div>
-      </section>
-
-      {/* MENSAGEM DO DIA */}
-      <section className="border-t border-border bg-card">
-        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
-          <p className="text-xs label-caps text-accent">Sua mensagem de hoje</p>
-          {daily ? (
-            <>
-              <p className="font-display mt-4 text-2xl md:text-3xl">
-                “{daily.verse_text}”
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground">{daily.verse_reference}</p>
-            </>
-          ) : (
-            <h2 className="font-display mt-4 text-3xl">
-              Você não recebeu esta mensagem por acaso.
-            </h2>
-          )}
-          <Link
-            href="/sentimentos"
-            className="mt-8 inline-block border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
-          >
-            Receber a mensagem
           </Link>
         </div>
       </section>

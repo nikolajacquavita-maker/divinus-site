@@ -6,16 +6,20 @@ export const revalidate = 0;
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  const [{ count: productsCount }, { count: activeCount }, { count: messagesCount }, { count: feelingsCount }] =
-    await Promise.all([
-      supabase.from("products").select("*", { count: "exact", head: true }),
-      supabase
-        .from("products")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "active"),
-      supabase.from("messages").select("*", { count: "exact", head: true }),
-      supabase.from("feelings").select("*", { count: "exact", head: true }),
-    ]);
+  const [
+    { count: productsCount },
+    { count: activeCount },
+    { count: feelingsCount },
+    { count: heroMessagesCount },
+  ] = await Promise.all([
+    supabase.from("products").select("*", { count: "exact", head: true }),
+    supabase
+      .from("products")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "active"),
+    supabase.from("feelings").select("*", { count: "exact", head: true }),
+    supabase.from("hero_messages").select("*", { count: "exact", head: true }),
+  ]);
 
   return (
     <div>
@@ -35,12 +39,12 @@ export default async function AdminDashboard() {
           <p className="font-display mt-2 text-4xl">{activeCount ?? 0}</p>
         </div>
         <div className="border border-border p-6">
-          <p className="text-xs label-caps text-muted-foreground">Mensagens</p>
-          <p className="font-display mt-2 text-4xl">{messagesCount ?? 0}</p>
-        </div>
-        <div className="border border-border p-6">
           <p className="text-xs label-caps text-muted-foreground">Sentimentos</p>
           <p className="font-display mt-2 text-4xl">{feelingsCount ?? 0}</p>
+        </div>
+        <div className="border border-border p-6">
+          <p className="text-xs label-caps text-muted-foreground">Mensagens da home</p>
+          <p className="font-display mt-2 text-4xl">{heroMessagesCount ?? 0}</p>
         </div>
       </div>
 
@@ -58,10 +62,10 @@ export default async function AdminDashboard() {
           Gerenciar sentimentos
         </Link>
         <Link
-          href="/admin/mensagens"
+          href="/admin/mensagens-hero"
           className="border border-border px-6 py-3 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
         >
-          Gerenciar mensagens
+          Gerenciar mensagens da home
         </Link>
         <Link
           href="/admin/comunidade"

@@ -50,13 +50,6 @@ export function MobileNav() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/sentimentos"
-              onClick={() => setOpen(false)}
-              className="mt-4 inline-block border border-accent px-4 py-3 text-center text-xs label-caps text-accent"
-            >
-              Preciso de uma mensagem
-            </Link>
           </nav>
         </div>
       )}

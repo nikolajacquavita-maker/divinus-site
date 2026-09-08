@@ -190,6 +190,38 @@ export async function deleteFeeling(id: string) {
   revalidatePath("/sentimentos");
 }
 
+export async function upsertHeroMessage(formData: FormData) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "") || null;
+  const payload = {
+    text: String(formData.get("text") ?? "").trim(),
+    is_active: formData.get("is_active") === "on",
+    sort_order: Number(formData.get("sort_order") ?? 0),
+  };
+
+  if (id) {
+    const { error } = await supabase.from("hero_messages").update(payload).eq("id", id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase.from("hero_messages").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath("/admin/mensagens-hero");
+  revalidatePath("/");
+  redirect("/admin/mensagens-hero");
+}
+
+export async function deleteHeroMessage(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("hero_messages").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/admin/mensagens-hero");
+  revalidatePath("/");
+}
+
 export async function setUniverseVisibility(universe: string, isVisible: boolean) {
   const supabase = await createClient();
   const { error } = await supabase
