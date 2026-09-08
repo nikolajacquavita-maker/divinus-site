@@ -7,7 +7,6 @@ const NAV = [
   { href: "/", label: "Início" },
   { href: "/produtos", label: "Produtos" },
   { href: "/sentimentos", label: "Sentimentos" },
-  { href: "/mensagem", label: "Mensagem" },
   { href: "/comunidade", label: "Comunidade" },
 ];
 
@@ -52,7 +51,7 @@ export function MobileNav() {
               </Link>
             ))}
             <Link
-              href="/mensagem"
+              href="/sentimentos"
               onClick={() => setOpen(false)}
               className="mt-4 inline-block border border-accent px-4 py-3 text-center text-xs label-caps text-accent"
             >

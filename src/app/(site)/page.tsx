@@ -88,7 +88,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/mensagem"
+              href="/sentimentos"
               className="border border-sand px-6 py-3 text-xs label-caps text-sand hover:bg-sand hover:text-deep transition-colors"
             >
               Conheça a mensagem
@@ -208,7 +208,7 @@ export default async function HomePage() {
             </h2>
           )}
           <Link
-            href="/mensagem"
+            href="/sentimentos"
             className="mt-8 inline-block border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
           >
             Receber a mensagem

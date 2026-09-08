@@ -5,7 +5,6 @@ const NAV = [
   { href: "/", label: "Início" },
   { href: "/produtos", label: "Produtos" },
   { href: "/sentimentos", label: "Sentimentos" },
-  { href: "/mensagem", label: "Mensagem" },
   { href: "/comunidade", label: "Comunidade" },
 ];
 
@@ -24,7 +23,7 @@ export function Header() {
           ))}
         </nav>
         <Link
-          href="/mensagem"
+          href="/sentimentos"
           className="hidden rounded-none border border-accent/60 px-4 py-2 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors md:inline-block"
         >
           Preciso de uma mensagem
