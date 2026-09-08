@@ -36,6 +36,10 @@ export function HeroMessageForm({ message }: { message?: HeroMessage }) {
         <textarea name="conexao" defaultValue={message?.conexao} rows={3} required className="admin-input" />
       </Field>
 
+      <Field label="Desafio" hint="Ação prática, genérica e fácil de executar, aplicando a mensagem à vida de quem lê">
+        <textarea name="desafio" defaultValue={message?.desafio} rows={3} required className="admin-input" />
+      </Field>
+
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
         <Field label="Ordem">
           <input

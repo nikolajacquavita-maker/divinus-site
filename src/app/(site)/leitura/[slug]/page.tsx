@@ -41,6 +41,7 @@ export default async function LeituraPage({
         <Section index="02" label="O capítulo" text={message.capitulo} />
         <Section index="03" label="Aplicação" text={message.aplicacao} />
         <Section index="04" label="Conexão" text={message.conexao} />
+        <Section index="05" label="Desafio" text={message.desafio} />
       </div>
 
       <div className="mt-4 border-t border-border pt-10 text-center">

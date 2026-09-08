@@ -46,6 +46,7 @@ export interface HeroMessage {
   capitulo: string;
   aplicacao: string;
   conexao: string;
+  desafio: string;
   is_active: boolean;
   sort_order: number;
   created_at: string;
