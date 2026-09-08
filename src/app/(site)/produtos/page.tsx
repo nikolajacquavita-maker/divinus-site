@@ -84,7 +84,7 @@ export default async function ProdutosPage() {
                       />
                       <p className="font-display mt-4 text-lg">São Paulo</p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        ritmo. potência. direção.
+                        a cidade que não para.
                       </p>
                       <span className="mt-2 inline-block text-xs label-caps text-accent group-hover:underline">
                         Conhecer a coleção →

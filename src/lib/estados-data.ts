@@ -14,7 +14,7 @@ export const ESTADOS_DISPONIVEIS: Record<string, EstadoContent> = {
   SP: {
     uf: "SP",
     nome: "São Paulo",
-    tagline: "ritmo. potência. direção.",
+    tagline: "a cidade que não para.",
     cor: "#e63946",
     historia:
       "São Paulo nasceu em 1554 como um colégio jesuíta no alto de uma colina, pensado para catequizar — não para virar a maior cidade do hemisfério sul. O crescimento veio em ondas: primeiro os bandeirantes, que usaram o planalto como ponto de partida para explorar o interior do Brasil; depois o café, no século 19, que trouxe trilhos, imigrantes de dezenas de países e o capital que deu origem à indústria paulista; por fim a industrialização do século 20, que transformou fazendas de café em bairros inteiros. Hoje a Grande São Paulo reúne mais de 21 milhões de pessoas, um mosaico de quem chegou de todos os cantos do Brasil e do mundo atrás do mesmo movimento que nunca parou.",
