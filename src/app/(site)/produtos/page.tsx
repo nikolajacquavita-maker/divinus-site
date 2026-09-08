@@ -4,7 +4,7 @@ import { UNIVERSES } from "@/lib/types";
 import { ProductCard } from "@/components/ProductCard";
 
 export const metadata: Metadata = {
-  title: "Produtos — Divinus Water, Performance e Essentials",
+  title: "Produtos — Água Divinus, Performance e Essentials",
 };
 
 export const revalidate = 0;

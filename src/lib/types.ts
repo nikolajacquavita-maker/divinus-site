@@ -67,7 +67,7 @@ export interface Message {
 }
 
 export const UNIVERSES: { value: ProductUniverse; label: string; index: string }[] = [
-  { value: "water", label: "Divinus Water", index: "01" },
+  { value: "water", label: "Água Divinus", index: "01" },
   { value: "performance", label: "Divinus Performance", index: "02" },
   { value: "essentials", label: "Divinus Essentials", index: "03" },
 ];
