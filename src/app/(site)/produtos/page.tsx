@@ -65,6 +65,26 @@ export default async function ProdutosPage() {
                     própria cor e data de lançamento, pensada a partir do que
                     mais faz sentido pra história e a fé de cada região.
                   </p>
+
+                  <div className="mt-8 grid gap-8 sm:grid-cols-2 sm:items-center">
+                    <img
+                      src="/images/brasil-27-estados.svg"
+                      alt="Mapa do Brasil com os 27 estados — São Paulo em destaque"
+                      className="mx-auto w-full max-w-sm"
+                    />
+                    <div>
+                      <p className="text-xs label-caps text-muted-foreground">Modelo de exemplo</p>
+                      <img
+                        src="/images/produtos/camiseta-sao-paulo-frente.jpg"
+                        alt="Camiseta Divinus Performance — São Paulo"
+                        className="mt-3 w-full border border-border"
+                      />
+                      <p className="font-display mt-4 text-lg">São Paulo</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        ritmo. potência. direção.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
