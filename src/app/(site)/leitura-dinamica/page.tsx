@@ -76,7 +76,19 @@ export default function LeituraDinamicaPage() {
               <p className="text-xs label-caps text-muted-foreground">{p.index}</p>
               <p className="font-display mt-1 text-lg">{p.titulo}</p>
             </div>
-            <p className="text-muted-foreground">{p.texto}</p>
+            <div>
+              <p className="text-muted-foreground">{p.texto}</p>
+              {p.index === "02" && (
+                <a
+                  href="https://www.bibliaon.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block text-xs label-caps text-accent hover:underline"
+                >
+                  Buscar palavra-chave em bibliaon.com →
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>
