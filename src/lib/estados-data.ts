@@ -24,10 +24,6 @@ export const ESTADOS_DISPONIVEIS: Record<string, EstadoContent> = {
       '"Non ducor, duco" — "não sou conduzido, conduzo" — é o lema no brasão da cidade de São Paulo, e resume bem o espírito do estado: o de quem abre caminho em vez de seguir. O aniversário da cidade, 25 de janeiro, é feriado e vira quase uma segunda virada de ano para os paulistanos. E o estado tem o maior corredor de ônibus do mundo, a Avenida Radial Leste — um símbolo de uma cidade que nunca parou de se mover.',
     escolhaCor:
       "O vermelho, o preto e o branco vêm direto da Bandeira Paulista, hasteada pela primeira vez em 1932 durante a Revolução Constitucionalista — o movimento que colocou São Paulo em pé de luta por uma constituição para o Brasil. Não é só uma escolha estética: é a mesma paleta que carrega até hoje a ideia de um povo que se levanta pelo que acredita, agora estampada numa camiseta feita para quem corre com propósito.",
-    images: [
-      "/images/produtos/camiseta-sao-paulo-frente.jpg",
-      "/images/produtos/camiseta-sao-paulo-verso.jpg",
-      "/images/produtos/camiseta-sao-paulo-detalhes.jpg",
-    ],
+    images: ["/images/produtos/camiseta-sao-paulo-original.jpg"],
   },
 };

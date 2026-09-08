@@ -78,7 +78,7 @@ export default async function ProdutosPage() {
                         Modelo de exemplo — disponível agora
                       </p>
                       <img
-                        src="/images/produtos/camiseta-sao-paulo-frente.jpg"
+                        src="/images/produtos/camiseta-sao-paulo-original.jpg"
                         alt="Camiseta Divinus Performance — São Paulo"
                         className="mt-3 w-full border border-border transition-colors group-hover:border-accent"
                       />
