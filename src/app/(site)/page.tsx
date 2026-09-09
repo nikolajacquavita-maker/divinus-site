@@ -158,7 +158,7 @@ export default async function HomePage() {
                   <img
                     src={copy.image}
                     alt={u.label}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="px-6 py-10 sm:px-8 sm:py-14">
