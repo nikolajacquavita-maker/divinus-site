@@ -28,12 +28,6 @@ export default async function ProdutosPage() {
         <div className="mx-auto max-w-3xl px-6 py-14 text-center sm:py-20">
           <p className="text-xs label-caps text-accent">Os universos da marca</p>
           <h1 className="font-display mt-4 text-3xl sm:text-4xl">Antes do preço, o propósito.</h1>
-          <p className="mt-6 text-muted-foreground">
-            A Divinus nasceu para levar a mensagem de Deus para lugares onde
-            muitas vezes ela não chega. Na água que você bebe. Na roupa que
-            você veste. No esporte. Nos momentos em que você mais precisa
-            lembrar quem você é.
-          </p>
         </div>
       </section>
 
