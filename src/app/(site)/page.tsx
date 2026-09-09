@@ -225,12 +225,9 @@ export default async function HomePage() {
       {/* PROPÓSITO / QR */}
       <section className="border-t border-border bg-card">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
-          <h2 className="font-display text-3xl">
-            Existe um propósito por trás desta peça.
-          </h2>
-          <p className="mt-6 text-muted-foreground">
+          <h2 className="font-display text-3xl sm:text-4xl">
             O físico abre o digital, e o digital devolve sentido ao físico.
-          </p>
+          </h2>
           <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs label-caps text-muted-foreground">
             <span>Produto</span>
             <span>Mensagem</span>
