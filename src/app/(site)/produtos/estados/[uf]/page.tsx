@@ -2,13 +2,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { UF_PATHS } from "@/lib/brazil-map-data";
-import { ESTADOS_DISPONIVEIS } from "@/lib/estados-data";
+import { ESTADOS_DISPONIVEIS, LANCAMENTOS } from "@/lib/estados-data";
 import { ProductGallery } from "@/components/ProductGallery";
 
 export const revalidate = 0;
 
 function findNome(uf: string) {
   return UF_PATHS.find((s) => s.uf === uf)?.nome;
+}
+
+function formatarPeriodo({ dataInicio, dataFim }: { dataInicio: string; dataFim: string }) {
+  const [anoI, mesI, diaI] = dataInicio.split("-").map(Number);
+  const [anoF, mesF, diaF] = dataFim.split("-").map(Number);
+  const inicio = new Date(anoI, mesI - 1, diaI);
+  const fim = new Date(anoF, mesF - 1, diaF);
+  const mes = fim.toLocaleDateString("pt-BR", { month: "long" });
+
+  if (mesI === mesF && anoI === anoF) {
+    return `${diaI} a ${diaF} de ${mes} de ${anoF}`;
+  }
+  const mesInicio = inicio.toLocaleDateString("pt-BR", { month: "long" });
+  return `${diaI} de ${mesInicio} a ${diaF} de ${mes} de ${anoF}`;
 }
 
 export async function generateMetadata({
@@ -34,6 +48,7 @@ export default async function EstadoPage({
   const estado = ESTADOS_DISPONIVEIS[uf];
 
   if (!estado) {
+    const lancamento = LANCAMENTOS[uf];
     return (
       <div className="mx-auto max-w-2xl px-6 py-14 text-center sm:py-20">
         <Link href="/produtos" className="text-xs label-caps text-muted-foreground hover:text-accent">
@@ -46,6 +61,17 @@ export default async function EstadoPage({
           cada uma com sua própria cor, pensada a partir do que mais faz
           sentido pra história e a fé de cada região.
         </p>
+
+        {lancamento && (
+          <div className="mt-8 border border-border p-6 text-left sm:p-8">
+            <p className="text-xs label-caps text-accent">Data e local de lançamento</p>
+            <p className="font-display mt-2 text-xl">{formatarPeriodo(lancamento)}</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {lancamento.evento} — {lancamento.local}
+            </p>
+          </div>
+        )}
+
         <Link
           href="/produtos"
           className="mt-8 inline-block border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"

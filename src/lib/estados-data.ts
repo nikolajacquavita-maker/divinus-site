@@ -10,6 +10,24 @@ export interface EstadoContent {
   images: string[];
 }
 
+export interface Lancamento {
+  uf: string;
+  dataInicio: string; // ISO yyyy-mm-dd
+  dataFim: string; // ISO yyyy-mm-dd
+  evento: string;
+  local: string;
+}
+
+export const LANCAMENTOS: Record<string, Lancamento> = {
+  MG: {
+    uf: "MG",
+    dataInicio: "2026-11-20",
+    dataFim: "2026-11-22",
+    evento: "UAI — Ultra dos Anjos Internacional",
+    local: "Prova de ultramaratona de 235 km, Brasil",
+  },
+};
+
 export const ESTADOS_DISPONIVEIS: Record<string, EstadoContent> = {
   SP: {
     uf: "SP",
