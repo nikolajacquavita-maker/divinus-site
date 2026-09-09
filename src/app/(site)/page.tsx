@@ -120,8 +120,8 @@ export default async function HomePage() {
       <section className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
         <p className="text-xs label-caps text-accent">Um movimento, não uma loja</p>
         <h2 className="font-display mt-4 text-3xl md:text-4xl">
-          A Divinus nasceu para levar a mensagem de Deus para lugares onde muitas
-          vezes ela não chega.
+          A Divinus nasceu com um propósito: levar sua mensagem espiritual além
+          das fronteiras, alcançando lugares e corações inatingidos.
         </h2>
         <p className="mt-6 text-muted-foreground">
           Na água que você bebe. Na roupa que você veste. No esporte. Na rotina. Nos
