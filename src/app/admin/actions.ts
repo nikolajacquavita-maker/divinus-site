@@ -212,6 +212,8 @@ export async function upsertHeroMessage(formData: FormData) {
     aplicacao: String(formData.get("aplicacao") ?? "").trim(),
     conexao: String(formData.get("conexao") ?? "").trim(),
     desafio: String(formData.get("desafio") ?? "").trim(),
+    versiculo_completo: String(formData.get("versiculo_completo") ?? "").trim() || null,
+    teologia: String(formData.get("teologia") ?? "").trim() || null,
     is_active: formData.get("is_active") === "on",
     sort_order: Number(formData.get("sort_order") ?? 0),
   };

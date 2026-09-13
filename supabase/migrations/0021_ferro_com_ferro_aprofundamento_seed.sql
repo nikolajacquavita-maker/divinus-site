@@ -1,0 +1,6 @@
+-- Divinus — primeiro exemplo de aprofundamento teológico (Provérbios 27:17)
+
+update public.hero_messages set
+  versiculo_completo = 'Ferro com ferro se aguça, assim o homem aguça o rosto do seu amigo. Quem guarda a figueira comerá do seu fruto; e o que atenta para o seu senhor será honrado. Como na água o rosto corresponde ao rosto, assim o coração do homem ao homem. (Provérbios 27:17-19)',
+  teologia = 'A Bíblia não descreve santificação como um projeto solitário. Hebreus 10:24-25 manda "considerarmo-nos uns aos outros, para nos estimularmos ao amor e boas obras", e explicitamente liga isso a não abandonar a reunião com outros crentes — a comunhão não é opcional, é o meio ordinário que Deus usa para amadurecer o caráter. Gálatas 6:1-2 dá o outro lado da mesma moeda: quem restaura um irmão em falta deve fazer isso "com espírito de mansidão", cumprindo assim "a lei de Cristo" — confronto e mansidão não são opostos, são parceiros. Tiago 5:16 vai além, ligando confissão mútua e oração uns pelos outros à própria cura espiritual. O ferro que agua o ferro dói antes de afiar; da mesma forma, a doutrina bíblica da igreja como corpo (1 Coríntios 12) pressupõe atrito construtivo entre partes diferentes, não uniformidade sem fricção nenhuma.'
+where slug = 'ferro-com-ferro-se-aguca';

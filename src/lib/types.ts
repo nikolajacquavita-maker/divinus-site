@@ -47,6 +47,8 @@ export interface HeroMessage {
   aplicacao: string;
   conexao: string;
   desafio: string;
+  versiculo_completo: string | null;
+  teologia: string | null;
   is_active: boolean;
   sort_order: number;
   created_at: string;

@@ -40,6 +40,33 @@ export function HeroMessageForm({ message }: { message?: HeroMessage }) {
         <textarea name="desafio" defaultValue={message?.desafio} rows={3} required className="admin-input" />
       </Field>
 
+      <div className="border border-border p-5">
+        <p className="text-xs label-caps text-accent">Aprofundamento (página /aprofundamento)</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Aparece quando a pessoa clica no versículo — texto bíblico completo,
+          vídeo (em breve) e uma leitura mais teológica. Opcional; sem
+          preencher, a página mostra um aviso de &ldquo;em breve&rdquo;.
+        </p>
+        <div className="mt-4 space-y-4">
+          <Field label="Versículo completo" hint="Texto integral da passagem, não só o resumo curto">
+            <textarea
+              name="versiculo_completo"
+              defaultValue={message?.versiculo_completo ?? ""}
+              rows={4}
+              className="admin-input"
+            />
+          </Field>
+          <Field label="Aprofundamento teológico" hint="Linha de raciocínio doutrinária/teológica, além do histórico e prático já cobertos acima">
+            <textarea
+              name="teologia"
+              defaultValue={message?.teologia ?? ""}
+              rows={5}
+              className="admin-input"
+            />
+          </Field>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
         <Field label="Ordem">
           <input

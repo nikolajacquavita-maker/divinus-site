@@ -33,8 +33,15 @@ export default async function LeituraPage({
         ← Início
       </Link>
 
-      <p className="mt-8 text-xs label-caps text-accent">{message.reference}</p>
-      <h1 className="font-display mt-2 text-2xl sm:text-3xl">{message.text}</h1>
+      <Link href={`/leitura/${message.slug}/aprofundamento`} className="group mt-8 block">
+        <p className="text-xs label-caps text-accent">{message.reference}</p>
+        <h1 className="font-display mt-2 text-2xl sm:text-3xl group-hover:underline">
+          {message.text}
+        </h1>
+        <span className="mt-2 inline-block text-xs label-caps text-muted-foreground group-hover:text-accent">
+          Ler o versículo completo e aprofundar →
+        </span>
+      </Link>
 
       <div className="mt-4">
         <Section index="01" label="Contexto" text={message.contexto} />
