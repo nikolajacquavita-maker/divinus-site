@@ -51,7 +51,10 @@ export default async function EstadoPage({
     const lancamento = LANCAMENTOS[uf];
     return (
       <div className="mx-auto max-w-2xl px-6 py-14 text-center sm:py-20">
-        <Link href="/produtos" className="text-xs label-caps text-muted-foreground hover:text-accent">
+        <Link
+          href="/produtos/performance"
+          className="text-xs label-caps text-muted-foreground hover:text-accent"
+        >
           ← Coleção 27 Estados
         </Link>
         <p className="mt-8 text-xs label-caps text-accent">Lançamento em breve</p>
@@ -73,7 +76,7 @@ export default async function EstadoPage({
         )}
 
         <Link
-          href="/produtos"
+          href="/produtos/performance"
           className="mt-8 inline-block border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
         >
           Ver outros estados
@@ -84,7 +87,10 @@ export default async function EstadoPage({
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-14 sm:py-20">
-      <Link href="/produtos" className="text-xs label-caps text-muted-foreground hover:text-accent">
+      <Link
+        href="/produtos/performance"
+        className="text-xs label-caps text-muted-foreground hover:text-accent"
+      >
         ← Coleção 27 Estados
       </Link>
 
@@ -114,7 +120,7 @@ export default async function EstadoPage({
 
       <div className="mt-4 border-t border-border pt-12 text-center">
         <Link
-          href="/produtos"
+          href="/produtos/performance"
           className="inline-block border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
         >
           Ver outros estados
