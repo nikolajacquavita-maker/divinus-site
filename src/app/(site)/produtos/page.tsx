@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getActiveProductsByUniverse, getVisibleUniverses } from "@/lib/data";
 import { UNIVERSES } from "@/lib/types";
 import { ProductCard } from "@/components/ProductCard";
+import { PerformanceShowcase } from "@/components/PerformanceShowcase";
 import { BrazilMap } from "@/components/BrazilMap";
 
 export const metadata: Metadata = {
@@ -44,6 +45,8 @@ export default async function ProdutosPage() {
                 <p className="mt-8 text-sm text-muted-foreground">
                   Em breve — os produtos dessa linha estão sendo preparados.
                 </p>
+              ) : u.value === "performance" ? (
+                <PerformanceShowcase products={products} />
               ) : (
                 <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {products.map((p) => (
