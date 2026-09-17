@@ -11,7 +11,14 @@ export function MunicipioMap({ uf }: { uf: string }) {
   const [hover, setHover] = useState<string | null>(null);
   const [box, setBox] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const dragging = useRef<{ x: number; y: number } | null>(null);
+  const dragging = useRef<{
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+    moved: boolean;
+    pointerId: number;
+  } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -66,17 +73,35 @@ export function MunicipioMap({ uf }: { uf: string }) {
     zoomAt(e.deltaY > 0 ? 1.25 : 0.8, px, py);
   }
 
+  const DRAG_THRESHOLD = 6;
+
   function handlePointerDown(e: React.PointerEvent<SVGSVGElement>) {
-    dragging.current = { x: e.clientX, y: e.clientY };
-    svgRef.current?.setPointerCapture(e.pointerId);
+    dragging.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      lastX: e.clientX,
+      lastY: e.clientY,
+      moved: false,
+      pointerId: e.pointerId,
+    };
   }
 
   function handlePointerMove(e: React.PointerEvent<SVGSVGElement>) {
-    if (!dragging.current || !box || !svgRef.current) return;
+    const drag = dragging.current;
+    if (!drag || !box || !svgRef.current) return;
+
+    if (!drag.moved) {
+      const dist = Math.hypot(e.clientX - drag.startX, e.clientY - drag.startY);
+      if (dist < DRAG_THRESHOLD) return;
+      drag.moved = true;
+      svgRef.current.setPointerCapture(drag.pointerId);
+    }
+
     const rect = svgRef.current.getBoundingClientRect();
-    const dx = ((e.clientX - dragging.current.x) / rect.width) * box.w;
-    const dy = ((e.clientY - dragging.current.y) / rect.height) * box.h;
-    dragging.current = { x: e.clientX, y: e.clientY };
+    const dx = ((e.clientX - drag.lastX) / rect.width) * box.w;
+    const dy = ((e.clientY - drag.lastY) / rect.height) * box.h;
+    drag.lastX = e.clientX;
+    drag.lastY = e.clientY;
     setBox((prev) => (prev ? clampBox({ ...prev, x: prev.x - dx, y: prev.y - dy }) : prev));
   }
 
