@@ -145,3 +145,36 @@ export const MESSAGE_CATEGORIES: { value: string; label: string }[] = [
   { value: "disciplina", label: "Disciplina" },
   { value: "recomeco", label: "Recomeço" },
 ];
+
+export interface MunicipioPoint {
+  c: string;
+  n: string;
+  s: string;
+  d: string;
+  x: number;
+  y: number;
+}
+
+export interface MunicipiosFile {
+  w: number;
+  h: number;
+  m: MunicipioPoint[];
+}
+
+export type IgrejaDenominacao = "catolica" | "evangelica" | "espirita";
+
+export const DENOMINACAO_LABEL: Record<IgrejaDenominacao, string> = {
+  catolica: "Católica",
+  evangelica: "Evangélica",
+  espirita: "Espírita",
+};
+
+export interface Igreja {
+  nome: string;
+  denominacao: IgrejaDenominacao;
+  endereco: string;
+  lat: number;
+  lng: number;
+  telefone?: string;
+  observacao?: string;
+}

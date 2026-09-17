@@ -7,6 +7,7 @@ const NAV = [
   { href: "/", label: "Início" },
   { href: "/produtos", label: "Produtos" },
   { href: "/sentimentos", label: "Sentimentos" },
+  { href: "/igrejas", label: "Igrejas" },
   { href: "/leitura-dinamica", label: "Leitura Dinâmica" },
   { href: "/comunidade", label: "Comunidade" },
 ];
