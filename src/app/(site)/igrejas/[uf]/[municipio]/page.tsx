@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getIgrejasByCidade } from "@/lib/igrejas-data";
 import { CidadeNome } from "@/components/CidadeNome";
 import { IgrejaLista } from "@/components/IgrejaLista";
+import { IgrejasMapa } from "@/components/IgrejasMapa";
 
 function prettify(slug: string) {
   return slug
@@ -47,7 +48,11 @@ export default async function IgrejasMunicipioPage({
         <>
           <p className="mt-4 text-sm text-muted-foreground">
             Igrejas católicas, evangélicas e espíritas cadastradas nessa cidade.
+            Clique num ponto do mapa pra ver o endereço e abrir no Google Maps.
           </p>
+          <div className="mt-8">
+            <IgrejasMapa igrejas={igrejas} />
+          </div>
           <div className="mt-8">
             <IgrejaLista igrejas={igrejas} />
           </div>
