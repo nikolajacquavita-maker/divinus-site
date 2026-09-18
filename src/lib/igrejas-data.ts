@@ -203,8 +203,8 @@ export const IGREJAS_POR_CIDADE: Record<string, Igreja[]> = {
       nome: "Igreja Amor e Cuidado — Campus Bela Vista",
       denominacao: "evangelica",
       endereco: "Rod. Nametala Rezek, km 2 — em frente ao Residencial Villa Toscana, Araçatuba/SP",
-      lat: -21.242944,
-      lng: -50.448518,
+      lat: -21.242634,
+      lng: -50.453,
       telefone: "(18) 3624-3728",
     },
     {
