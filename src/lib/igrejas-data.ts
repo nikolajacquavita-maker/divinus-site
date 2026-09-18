@@ -200,11 +200,11 @@ export const IGREJAS_POR_CIDADE: Record<string, Igreja[]> = {
       lng: -50.479201,
     },
     {
-      nome: "Igreja Amor e Cuidado",
+      nome: "Igreja Amor e Cuidado — Campus Bela Vista",
       denominacao: "evangelica",
-      endereco: "Rua Delegado Alvino Alves da Costa, 238 — Petit-Trianon, Araçatuba/SP, 16058-523",
-      lat: -21.15698,
-      lng: -50.455827,
+      endereco: "Rod. Nametala Rezek, km 2 — em frente ao Residencial Villa Toscana, Araçatuba/SP",
+      lat: -21.242944,
+      lng: -50.448518,
       telefone: "(18) 3624-3728",
     },
     {
