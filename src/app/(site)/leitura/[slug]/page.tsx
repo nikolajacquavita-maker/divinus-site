@@ -63,6 +63,15 @@ export default async function LeituraPage({
       </div>
 
       <div className="mt-4 border-t border-border pt-10 text-center">
+        <Link
+          href="/comunidade"
+          className="inline-block border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
+        >
+          Eu aceito o desafio
+        </Link>
+      </div>
+
+      <div className="mt-10 border-t border-border pt-10 text-center">
         <p className="font-display text-xl sm:text-2xl">Você não precisa correr sozinho.</p>
         <Link
           href="/sentimentos"
@@ -77,12 +86,6 @@ export default async function LeituraPage({
             className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
           >
             Ler outra mensagem
-          </Link>
-          <Link
-            href="/comunidade"
-            className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
-          >
-            Eu aceito o desafio
           </Link>
           <Link
             href="/produtos"
