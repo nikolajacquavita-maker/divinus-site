@@ -11,6 +11,8 @@ export default async function AdminDashboard() {
     { count: activeCount },
     { count: feelingsCount },
     { count: heroMessagesCount },
+    { count: pendingMembersCount },
+    { count: pendingGroupsCount },
   ] = await Promise.all([
     supabase.from("products").select("*", { count: "exact", head: true }),
     supabase
@@ -19,6 +21,14 @@ export default async function AdminDashboard() {
       .eq("status", "active"),
     supabase.from("feelings").select("*", { count: "exact", head: true }),
     supabase.from("hero_messages").select("*", { count: "exact", head: true }),
+    supabase
+      .from("members")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "pending"),
+    supabase
+      .from("prayer_groups")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "pending"),
   ]);
 
   return (
@@ -29,7 +39,7 @@ export default async function AdminDashboard() {
         mensagens do site.
       </p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-4">
+      <div className="mt-10 grid gap-6 sm:grid-cols-3 lg:grid-cols-6">
         <div className="border border-border p-6">
           <p className="text-xs label-caps text-muted-foreground">Produtos</p>
           <p className="font-display mt-2 text-4xl">{productsCount ?? 0}</p>
@@ -45,6 +55,14 @@ export default async function AdminDashboard() {
         <div className="border border-border p-6">
           <p className="text-xs label-caps text-muted-foreground">Mensagens da home</p>
           <p className="font-display mt-2 text-4xl">{heroMessagesCount ?? 0}</p>
+        </div>
+        <div className="border border-border p-6">
+          <p className="text-xs label-caps text-muted-foreground">Cadastros pendentes</p>
+          <p className="font-display mt-2 text-4xl">{pendingMembersCount ?? 0}</p>
+        </div>
+        <div className="border border-border p-6">
+          <p className="text-xs label-caps text-muted-foreground">Grupos de oração pendentes</p>
+          <p className="font-display mt-2 text-4xl">{pendingGroupsCount ?? 0}</p>
         </div>
       </div>
 
@@ -72,6 +90,18 @@ export default async function AdminDashboard() {
           className="border border-border px-6 py-3 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
         >
           Gerenciar comunidade
+        </Link>
+        <Link
+          href="/admin/membros"
+          className="border border-border px-6 py-3 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
+        >
+          Aprovar cadastros
+        </Link>
+        <Link
+          href="/admin/grupos-oracao"
+          className="border border-border px-6 py-3 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
+        >
+          Aprovar grupos de oração
         </Link>
       </div>
     </div>

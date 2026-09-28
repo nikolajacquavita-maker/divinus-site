@@ -178,3 +178,27 @@ export interface Igreja {
   telefone?: string;
   observacao?: string;
 }
+
+export type MemberStatus = "pending" | "approved" | "rejected";
+
+export interface Member {
+  id: string;
+  name: string;
+  email: string;
+  status: MemberStatus;
+}
+
+export type PrayerGroupStatus = "pending" | "approved" | "rejected";
+
+export interface PrayerGroup {
+  id: string;
+  member_id: string;
+  uf: string;
+  cidade: string;
+  endereco: string;
+  foto_url: string | null;
+  horario: string;
+  descricao: string;
+  status: PrayerGroupStatus;
+  created_at: string;
+}
