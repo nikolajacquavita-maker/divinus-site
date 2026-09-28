@@ -88,7 +88,7 @@ function Section({ index, label, text }: { index: string; label: string; text: s
         <p className="text-xs label-caps text-muted-foreground">{index}</p>
         <p className="font-display mt-1 text-lg">{label}</p>
       </div>
-      <p className="text-muted-foreground">{text}</p>
+      <p className="whitespace-pre-line text-muted-foreground">{text}</p>
     </div>
   );
 }
