@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getHeroMessageBySlug, getRandomHeroMessage } from "@/lib/data";
+import { getHeroMessageBySlug } from "@/lib/data";
 
 export const revalidate = 0;
 
@@ -24,8 +24,6 @@ export default async function LeituraPage({
   const { slug } = await params;
   const message = await getHeroMessageBySlug(slug);
   if (!message) notFound();
-
-  const other = await getRandomHeroMessage();
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-14 sm:py-20">
@@ -74,14 +72,18 @@ export default async function LeituraPage({
         </Link>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          {other && (
-            <Link
-              href={`/leitura/${other.slug}`}
-              className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
-            >
-              Ler outra mensagem
-            </Link>
-          )}
+          <Link
+            href="/"
+            className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
+          >
+            Ler outra mensagem
+          </Link>
+          <Link
+            href="/comunidade"
+            className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
+          >
+            Eu aceito o desafio
+          </Link>
           <Link
             href="/produtos"
             className="border border-border px-5 py-2.5 text-xs label-caps hover:border-accent hover:text-accent transition-colors"
