@@ -50,6 +50,19 @@ export default async function LoginPage({
         </button>
       </form>
 
+      <div className="mt-6 flex items-center gap-3">
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-xs text-muted-foreground">ou</span>
+        <div className="h-px flex-1 bg-border" />
+      </div>
+
+      <a
+        href="/api/auth/google/login"
+        className="mt-6 flex w-full items-center justify-center gap-2 border border-border py-3 text-xs label-caps hover:border-accent transition-colors"
+      >
+        Entrar com Google
+      </a>
+
       <p className="mt-6 text-center text-xs text-muted-foreground">
         Ainda não tem conta?{" "}
         <Link href="/grupo-de-oracao/cadastro" className="text-accent hover:underline">

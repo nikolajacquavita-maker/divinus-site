@@ -51,6 +51,27 @@ export async function loginMember(email: string, password: string) {
   return { error: null };
 }
 
+export async function loginWithGoogle(email: string, name: string, googleSub: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("member_oauth_upsert", {
+    p_email: email,
+    p_name: name,
+    p_google_sub: googleSub,
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  const row = data?.[0];
+  if (!row?.out_id) {
+    return { error: "Não foi possível entrar com o Google." };
+  }
+
+  await createMemberSession(row.out_id);
+  return { error: null };
+}
+
 export async function logoutMember() {
   await clearMemberSession();
 }
