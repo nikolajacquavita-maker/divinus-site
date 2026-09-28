@@ -33,15 +33,28 @@ export default async function LeituraPage({
         ← Início
       </Link>
 
-      <Link href={`/leitura/${message.slug}/aprofundamento`} className="group mt-8 block">
+      <div className="mt-8">
         <p className="text-xs label-caps text-accent">{message.reference}</p>
-        <h1 className="font-display mt-2 text-2xl sm:text-3xl group-hover:underline">
-          {message.text}
-        </h1>
-        <span className="mt-2 inline-block text-xs label-caps text-muted-foreground group-hover:text-accent">
-          Ler o versículo completo e aprofundar →
-        </span>
-      </Link>
+        <h1 className="font-display mt-2 text-2xl sm:text-3xl">{message.text}</h1>
+
+        {message.versiculo_completo && (
+          <blockquote className="mt-6 border-l-2 border-accent pl-5">
+            <p className="font-display text-lg italic text-foreground sm:text-xl">
+              {parseVersiculo(message.versiculo_completo).texto}
+            </p>
+            <p className="mt-2 text-xs label-caps text-muted-foreground">
+              {parseVersiculo(message.versiculo_completo).referencia ?? message.reference}
+            </p>
+          </blockquote>
+        )}
+
+        <Link
+          href={`/leitura/${message.slug}/aprofundamento`}
+          className="group mt-6 inline-block text-xs label-caps text-muted-foreground hover:text-accent"
+        >
+          Entender esse versículo →
+        </Link>
+      </div>
 
       <div className="mt-4">
         <Section index="01" label="Contexto" text={message.contexto} />
@@ -79,6 +92,12 @@ export default async function LeituraPage({
       </div>
     </div>
   );
+}
+
+function parseVersiculo(versiculoCompleto: string): { texto: string; referencia: string | null } {
+  const match = versiculoCompleto.match(/^"([\s\S]*)"\s*\(([^)]+)\)$/);
+  if (!match) return { texto: versiculoCompleto, referencia: null };
+  return { texto: match[1], referencia: match[2] };
 }
 
 function Section({ index, label, text }: { index: string; label: string; text: string }) {
