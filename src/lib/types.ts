@@ -202,3 +202,19 @@ export interface PrayerGroup {
   status: PrayerGroupStatus;
   created_at: string;
 }
+
+export type Testamento = "AT" | "NT";
+
+export interface BibleBookIndexEntry {
+  id: string;
+  name: string;
+  order: number;
+  testamento: Testamento;
+  chapters: number[];
+}
+
+export interface BibleBook {
+  id: string;
+  name: string;
+  chapters: string[][];
+}

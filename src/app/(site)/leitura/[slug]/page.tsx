@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getHeroMessageBySlug } from "@/lib/data";
+import { referenciaParaRota } from "@/lib/biblia-referencia";
 
 export const revalidate = 0;
 
@@ -47,7 +48,7 @@ export default async function LeituraPage({
         )}
 
         <Link
-          href={`/leitura/${message.slug}/aprofundamento`}
+          href={referenciaParaRota(message.reference) ?? `/leitura/${message.slug}/aprofundamento`}
           className="group mt-6 inline-block text-xs label-caps text-muted-foreground hover:text-accent"
         >
           Entender esse versículo →

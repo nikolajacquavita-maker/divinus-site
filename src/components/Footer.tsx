@@ -29,6 +29,7 @@ export function Footer() {
             <li><Link href="/grupo-de-oracao" className="hover:text-foreground">Grupo de Oração</Link></li>
             <li><Link href="/leitura-dinamica" className="hover:text-foreground">Leitura Dinâmica</Link></li>
             <li><Link href="/comunidade" className="hover:text-foreground">Comunidade</Link></li>
+            <li><Link href="/biblia" className="hover:text-foreground">Bíblia</Link></li>
           </ul>
         </div>
         <div>

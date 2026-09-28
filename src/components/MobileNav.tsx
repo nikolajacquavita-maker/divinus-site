@@ -11,6 +11,7 @@ const NAV = [
   { href: "/grupo-de-oracao", label: "Grupo de Oração" },
   { href: "/leitura-dinamica", label: "Leitura Dinâmica" },
   { href: "/comunidade", label: "Comunidade" },
+  { href: "/biblia", label: "Bíblia" },
 ];
 
 export function MobileNav() {
