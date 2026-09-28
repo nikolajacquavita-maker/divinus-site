@@ -12,10 +12,14 @@ export default async function AdminMembrosPage() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("members")
-    .select("id, name, email, status, created_at")
+    .select("id, name, email, status, created_at, cpf, telefone")
     .order("created_at", { ascending: false });
 
-  const members = (data ?? []) as (Member & { created_at: string })[];
+  const members = (data ?? []) as (Member & {
+    created_at: string;
+    cpf: string | null;
+    telefone: string | null;
+  })[];
   const pending = members.filter((m) => m.status === "pending");
   const others = members.filter((m) => m.status !== "pending");
 
@@ -39,10 +43,15 @@ export default async function AdminMembrosPage() {
           {pending.map((m) => (
             <div
               key={m.id}
-              className="grid gap-3 border border-border p-4 sm:grid-cols-[1fr_1fr_auto_auto]"
+              className="grid gap-3 border border-border p-4 sm:grid-cols-[1.5fr_auto_auto]"
             >
-              <p className="text-sm">{m.name}</p>
-              <p className="text-sm text-muted-foreground">{m.email}</p>
+              <div>
+                <p className="text-sm">{m.name}</p>
+                <p className="text-sm text-muted-foreground">{m.email}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {m.cpf ?? "CPF não informado"} · {m.telefone ?? "telefone não informado"}
+                </p>
+              </div>
               <p className="text-xs text-muted-foreground">{formatDate(m.created_at)}</p>
               <div className="flex gap-2">
                 <form action={setMemberStatus.bind(null, m.id, "approved")}>
@@ -67,10 +76,15 @@ export default async function AdminMembrosPage() {
           {others.map((m) => (
             <div
               key={m.id}
-              className="grid gap-3 border border-border p-4 sm:grid-cols-[1fr_1fr_auto_auto]"
+              className="grid gap-3 border border-border p-4 sm:grid-cols-[1.5fr_auto_auto]"
             >
-              <p className="text-sm">{m.name}</p>
-              <p className="text-sm text-muted-foreground">{m.email}</p>
+              <div>
+                <p className="text-sm">{m.name}</p>
+                <p className="text-sm text-muted-foreground">{m.email}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {m.cpf ?? "CPF não informado"} · {m.telefone ?? "telefone não informado"}
+                </p>
+              </div>
               <p className="text-xs label-caps text-muted-foreground">{m.status}</p>
               <div className="flex gap-2">
                 {m.status !== "approved" && (

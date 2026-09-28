@@ -3,12 +3,20 @@ import { createClient } from "@/lib/supabase/server";
 import { createMemberSession, getSessionMemberId, clearMemberSession } from "@/lib/auth/session";
 import type { Member } from "@/lib/types";
 
-export async function signupMember(name: string, email: string, password: string) {
+export async function signupMember(
+  name: string,
+  email: string,
+  password: string,
+  cpf: string,
+  telefone: string,
+) {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("member_signup", {
     p_name: name,
     p_email: email,
     p_password: password,
+    p_cpf: cpf,
+    p_telefone: telefone,
   });
 
   if (error) {

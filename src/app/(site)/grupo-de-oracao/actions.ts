@@ -8,8 +8,10 @@ export async function signup(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const cpf = String(formData.get("cpf") ?? "").trim();
+  const telefone = String(formData.get("telefone") ?? "").trim();
 
-  const { error } = await signupMember(name, email, password);
+  const { error } = await signupMember(name, email, password, cpf, telefone);
   if (error) {
     redirect(`/grupo-de-oracao/cadastro?error=${encodeURIComponent(error)}`);
   }

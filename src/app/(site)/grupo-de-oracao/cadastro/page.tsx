@@ -43,6 +43,30 @@ export default async function CadastroPage({
           />
         </div>
         <div>
+          <label className="text-xs label-caps text-muted-foreground">CPF</label>
+          <input
+            type="text"
+            name="cpf"
+            required
+            inputMode="numeric"
+            placeholder="000.000.000-00"
+            pattern="[\d.\-]{11,14}"
+            title="Digite os 11 números do CPF"
+            className="mt-2 w-full border border-border bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
+          />
+        </div>
+        <div>
+          <label className="text-xs label-caps text-muted-foreground">Telefone</label>
+          <input
+            type="tel"
+            name="telefone"
+            required
+            autoComplete="tel"
+            placeholder="(00) 00000-0000"
+            className="mt-2 w-full border border-border bg-transparent px-3 py-2.5 text-sm outline-none focus:border-accent"
+          />
+        </div>
+        <div>
           <label className="text-xs label-caps text-muted-foreground">Senha</label>
           <input
             type="password"
