@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { login } from "../actions";
 
 export const metadata: Metadata = {
-  title: "Entrar | Grupo de Oração | Divinus",
+  title: "Entrar | Divinus",
 };
 
 export default async function LoginPage({
@@ -15,7 +15,7 @@ export default async function LoginPage({
 
   return (
     <div className="mx-auto max-w-sm px-6 py-14 sm:py-20">
-      <p className="text-xs label-caps text-accent">Grupo de Oração</p>
+      <p className="text-xs label-caps text-accent">Login</p>
       <h1 className="font-display mt-2 text-3xl">Entrar</h1>
 
       <form action={login} className="mt-8 space-y-4">

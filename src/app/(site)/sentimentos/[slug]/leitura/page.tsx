@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getFeelingBySlug } from "@/lib/data";
 import { VideoPlaceholder } from "@/components/VideoPlaceholder";
+import { referenciaParaRota } from "@/lib/biblia-referencia";
 
 export const revalidate = 0;
 
@@ -39,6 +40,15 @@ export default async function SentimentoLeituraPage({
         {feeling.biblico_nome} · {feeling.biblico_referencia}
       </p>
       <h1 className="font-display mt-2 text-2xl sm:text-3xl">«{feeling.biblico_versiculo}»</h1>
+
+      {referenciaParaRota(feeling.biblico_referencia) && (
+        <Link
+          href={referenciaParaRota(feeling.biblico_referencia)!}
+          className="mt-4 inline-block text-xs label-caps text-muted-foreground hover:text-accent"
+        >
+          Ler a passagem completa na Bíblia →
+        </Link>
+      )}
 
       <div className="mt-8">
         <VideoPlaceholder stage="espirito" />

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { signup } from "../actions";
 
 export const metadata: Metadata = {
-  title: "Cadastro | Grupo de Oração | Divinus",
+  title: "Cadastro | Divinus",
 };
 
 export default async function CadastroPage({
@@ -15,7 +15,7 @@ export default async function CadastroPage({
 
   return (
     <div className="mx-auto max-w-sm px-6 py-14 sm:py-20">
-      <p className="text-xs label-caps text-accent">Grupo de Oração</p>
+      <p className="text-xs label-caps text-accent">Login</p>
       <h1 className="font-display mt-2 text-3xl">Cadastre-se</h1>
       <p className="mt-4 text-sm text-muted-foreground">
         Seu acesso é liberado depois de uma aprovação.
