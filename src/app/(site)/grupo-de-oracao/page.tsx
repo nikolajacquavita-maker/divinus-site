@@ -24,13 +24,13 @@ export default async function GrupoOracaoPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link
-            href="/grupo-de-oracao/login"
+            href="/grupo-de-oracao/login?next=%2Fgrupo-de-oracao"
             className="border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
           >
             Entrar
           </Link>
           <Link
-            href="/grupo-de-oracao/cadastro"
+            href="/grupo-de-oracao/cadastro?next=%2Fgrupo-de-oracao"
             className="border border-border px-6 py-3 text-xs label-caps hover:border-accent transition-colors"
           >
             Cadastrar
@@ -40,7 +40,7 @@ export default async function GrupoOracaoPage() {
     );
   }
 
-  if (member.status === "pending") {
+  if (member.grupo_oracao_status === "pending") {
     return (
       <div className="mx-auto max-w-md px-6 py-14 text-center sm:py-20">
         <p className="text-xs label-caps text-accent">Grupo de Oração</p>
@@ -58,7 +58,7 @@ export default async function GrupoOracaoPage() {
     );
   }
 
-  if (member.status === "rejected") {
+  if (member.grupo_oracao_status === "rejected") {
     return (
       <div className="mx-auto max-w-md px-6 py-14 text-center sm:py-20">
         <p className="text-xs label-caps text-accent">Grupo de Oração</p>

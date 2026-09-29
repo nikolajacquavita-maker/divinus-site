@@ -24,13 +24,13 @@ export default async function BibliaPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link
-            href="/grupo-de-oracao/login"
+            href="/grupo-de-oracao/login?next=%2Fbiblia"
             className="border border-accent bg-accent px-6 py-3 text-xs label-caps text-accent-foreground hover:opacity-90 transition-opacity"
           >
             Entrar
           </Link>
           <Link
-            href="/grupo-de-oracao/cadastro"
+            href="/grupo-de-oracao/cadastro?next=%2Fbiblia"
             className="border border-border px-6 py-3 text-xs label-caps hover:border-accent transition-colors"
           >
             Cadastrar

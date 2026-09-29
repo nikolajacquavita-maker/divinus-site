@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { NavLoginLink } from "@/components/NavLoginLink";
 
 const NAV = [
   { href: "/", label: "Início" },
@@ -12,7 +13,6 @@ const NAV = [
   { href: "/leitura-dinamica", label: "Leitura Dinâmica" },
   { href: "/comunidade", label: "Comunidade" },
   { href: "/biblia", label: "Bíblia" },
-  { href: "/grupo-de-oracao/login", label: "Login" },
 ];
 
 export function MobileNav() {
@@ -55,6 +55,7 @@ export function MobileNav() {
                 {item.label}
               </Link>
             ))}
+            <NavLoginLink onClick={() => setOpen(false)} className="font-display text-foreground" />
           </nav>
         </div>
       )}

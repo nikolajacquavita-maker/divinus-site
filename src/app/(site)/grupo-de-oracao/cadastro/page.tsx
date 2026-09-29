@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { signup } from "../actions";
+import { sanitizeNextPath } from "@/lib/auth/next-path";
 
 export const metadata: Metadata = {
   title: "Cadastro | Divinus",
@@ -9,19 +10,22 @@ export const metadata: Metadata = {
 export default async function CadastroPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, next: rawNext } = await searchParams;
+  const next = sanitizeNextPath(rawNext);
 
   return (
     <div className="mx-auto max-w-sm px-6 py-14 sm:py-20">
       <p className="text-xs label-caps text-accent">Login</p>
       <h1 className="font-display mt-2 text-3xl">Cadastre-se</h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        Seu acesso é liberado depois de uma aprovação.
+        Seu acesso ao site é liberado na hora. O Grupo de Oração passa por
+        uma aprovação à parte.
       </p>
 
       <form action={signup} className="mt-8 space-y-4">
+        <input type="hidden" name="next" value={next} />
         <div>
           <label className="text-xs label-caps text-muted-foreground">Nome</label>
           <input
@@ -96,7 +100,7 @@ export default async function CadastroPage({
       </div>
 
       <a
-        href="/api/auth/google/login"
+        href={`/api/auth/google/login?next=${encodeURIComponent(next)}`}
         className="mt-6 flex w-full items-center justify-center gap-2 border border-border py-3 text-xs label-caps hover:border-accent transition-colors"
       >
         Cadastrar com Google
@@ -104,7 +108,10 @@ export default async function CadastroPage({
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
         Já tem conta?{" "}
-        <Link href="/grupo-de-oracao/login" className="text-accent hover:underline">
+        <Link
+          href={`/grupo-de-oracao/login?next=${encodeURIComponent(next)}`}
+          className="text-accent hover:underline"
+        >
           Entrar
         </Link>
       </p>

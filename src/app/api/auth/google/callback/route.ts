@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { exchangeGoogleCode } from "@/lib/auth/google";
 import { loginWithGoogle } from "@/lib/members-data";
+import { sanitizeNextPath } from "@/lib/auth/next-path";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,7 @@ export async function GET(request: NextRequest) {
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
   const savedState = request.cookies.get("google_oauth_state")?.value;
+  const next = sanitizeNextPath(request.cookies.get("google_oauth_next")?.value);
 
   const fail = (message: string) => {
     const response = NextResponse.redirect(
@@ -16,6 +18,7 @@ export async function GET(request: NextRequest) {
     );
     response.headers.set("Cache-Control", "no-store, must-revalidate");
     response.cookies.delete("google_oauth_state");
+    response.cookies.delete("google_oauth_next");
     return response;
   };
 
@@ -39,8 +42,9 @@ export async function GET(request: NextRequest) {
     return fail("Não foi possível entrar com o Google.");
   }
 
-  const response = NextResponse.redirect(new URL("/grupo-de-oracao", request.url));
+  const response = NextResponse.redirect(new URL(next, request.url));
   response.headers.set("Cache-Control", "no-store, must-revalidate");
   response.cookies.delete("google_oauth_state");
+  response.cookies.delete("google_oauth_next");
   return response;
 }

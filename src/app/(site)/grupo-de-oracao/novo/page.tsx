@@ -18,7 +18,7 @@ export default async function NovoGrupoOracaoPage({
   const { error, enviado } = await searchParams;
 
   const member = await getCurrentMember();
-  if (!member || member.status !== "approved") {
+  if (!member || member.grupo_oracao_status !== "approved") {
     redirect("/grupo-de-oracao");
   }
 

@@ -6,7 +6,10 @@ import type { MemberStatus, PrayerGroupStatus } from "@/lib/types";
 
 export async function setMemberStatus(id: string, status: MemberStatus) {
   const supabase = await createClient();
-  const { error } = await supabase.from("members").update({ status }).eq("id", id);
+  const { error } = await supabase
+    .from("members")
+    .update({ grupo_oracao_status: status })
+    .eq("id", id);
   if (error) throw new Error(error.message);
 
   revalidatePath("/admin/membros");

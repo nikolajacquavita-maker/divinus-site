@@ -12,7 +12,7 @@ export default async function AdminMembrosPage() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("members")
-    .select("id, name, email, status, created_at, cpf, telefone")
+    .select("id, name, email, grupo_oracao_status, created_at, cpf, telefone")
     .order("created_at", { ascending: false });
 
   const members = (data ?? []) as (Member & {
@@ -20,15 +20,16 @@ export default async function AdminMembrosPage() {
     cpf: string | null;
     telefone: string | null;
   })[];
-  const pending = members.filter((m) => m.status === "pending");
-  const others = members.filter((m) => m.status !== "pending");
+  const pending = members.filter((m) => m.grupo_oracao_status === "pending");
+  const others = members.filter((m) => m.grupo_oracao_status !== "pending");
 
   return (
     <div className="space-y-16">
       <div>
-        <h1 className="font-display text-3xl">Cadastros — Grupo de Oração</h1>
+        <h1 className="font-display text-3xl">Autorizações — Grupo de Oração</h1>
         <p className="mt-2 text-muted-foreground">
-          Contas que podem acessar a área de grupos de oração.
+          Contas que podem acessar a área de grupos de oração. A conta em si já é
+          criada automaticamente — essa aprovação libera só o Grupo de Oração.
         </p>
       </div>
 
@@ -85,16 +86,16 @@ export default async function AdminMembrosPage() {
                   {m.cpf ?? "CPF não informado"} · {m.telefone ?? "telefone não informado"}
                 </p>
               </div>
-              <p className="text-xs label-caps text-muted-foreground">{m.status}</p>
+              <p className="text-xs label-caps text-muted-foreground">{m.grupo_oracao_status}</p>
               <div className="flex gap-2">
-                {m.status !== "approved" && (
+                {m.grupo_oracao_status !== "approved" && (
                   <form action={setMemberStatus.bind(null, m.id, "approved")}>
                     <button className="border border-accent px-3 py-1.5 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground">
                       Aprovar
                     </button>
                   </form>
                 )}
-                {m.status !== "rejected" && (
+                {m.grupo_oracao_status !== "rejected" && (
                   <form action={setMemberStatus.bind(null, m.id, "rejected")}>
                     <button className="border border-border px-3 py-1.5 text-xs label-caps text-muted-foreground hover:border-red-400 hover:text-red-400">
                       Rejeitar

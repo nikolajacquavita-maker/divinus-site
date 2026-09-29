@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { signupMember, loginMember, logoutMember, getCurrentMember } from "@/lib/members-data";
 import { submitPrayerGroup } from "@/lib/prayer-groups-data";
+import { sanitizeNextPath } from "@/lib/auth/next-path";
 
 export async function signup(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
@@ -10,23 +11,27 @@ export async function signup(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const cpf = String(formData.get("cpf") ?? "").trim();
   const telefone = String(formData.get("telefone") ?? "").trim();
+  const next = sanitizeNextPath(String(formData.get("next") ?? ""));
 
   const { error } = await signupMember(name, email, password, cpf, telefone);
   if (error) {
-    redirect(`/grupo-de-oracao/cadastro?error=${encodeURIComponent(error)}`);
+    redirect(
+      `/grupo-de-oracao/cadastro?error=${encodeURIComponent(error)}&next=${encodeURIComponent(next)}`,
+    );
   }
-  redirect("/grupo-de-oracao");
+  redirect(next);
 }
 
 export async function login(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const next = sanitizeNextPath(String(formData.get("next") ?? ""));
 
   const { error } = await loginMember(email, password);
   if (error) {
-    redirect(`/grupo-de-oracao/login?error=${encodeURIComponent(error)}`);
+    redirect(`/grupo-de-oracao/login?error=${encodeURIComponent(error)}&next=${encodeURIComponent(next)}`);
   }
-  redirect("/grupo-de-oracao");
+  redirect(next);
 }
 
 export async function logout() {
@@ -36,7 +41,7 @@ export async function logout() {
 
 export async function submitGroup(formData: FormData) {
   const member = await getCurrentMember();
-  if (!member || member.status !== "approved") {
+  if (!member || member.grupo_oracao_status !== "approved") {
     redirect("/grupo-de-oracao");
   }
 

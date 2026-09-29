@@ -186,6 +186,7 @@ export interface Member {
   name: string;
   email: string;
   status: MemberStatus;
+  grupo_oracao_status: MemberStatus;
 }
 
 export type PrayerGroupStatus = "pending" | "approved" | "rejected";

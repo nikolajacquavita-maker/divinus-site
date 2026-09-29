@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MobileNav } from "@/components/MobileNav";
+import { NavLoginLink } from "@/components/NavLoginLink";
 
 const NAV = [
   { href: "/", label: "Início" },
@@ -10,7 +11,6 @@ const NAV = [
   { href: "/leitura-dinamica", label: "Leitura Dinâmica" },
   { href: "/comunidade", label: "Comunidade" },
   { href: "/biblia", label: "Bíblia" },
-  { href: "/grupo-de-oracao/login", label: "Login" },
 ];
 
 export function Header() {
@@ -26,6 +26,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <NavLoginLink className="hover:text-foreground transition-colors" />
         </nav>
         <div className="flex justify-end">
           <span aria-hidden className="invisible hidden font-display text-lg label-caps tracking-widest sm:text-xl md:block">

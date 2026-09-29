@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { login } from "../actions";
+import { sanitizeNextPath } from "@/lib/auth/next-path";
 
 export const metadata: Metadata = {
   title: "Entrar | Divinus",
@@ -9,9 +10,10 @@ export const metadata: Metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, next: rawNext } = await searchParams;
+  const next = sanitizeNextPath(rawNext);
 
   return (
     <div className="mx-auto max-w-sm px-6 py-14 sm:py-20">
@@ -19,6 +21,7 @@ export default async function LoginPage({
       <h1 className="font-display mt-2 text-3xl">Entrar</h1>
 
       <form action={login} className="mt-8 space-y-4">
+        <input type="hidden" name="next" value={next} />
         <div>
           <label className="text-xs label-caps text-muted-foreground">E-mail</label>
           <input
@@ -57,7 +60,7 @@ export default async function LoginPage({
       </div>
 
       <a
-        href="/api/auth/google/login"
+        href={`/api/auth/google/login?next=${encodeURIComponent(next)}`}
         className="mt-6 flex w-full items-center justify-center gap-2 border border-border py-3 text-xs label-caps hover:border-accent transition-colors"
       >
         Entrar com Google
@@ -65,7 +68,10 @@ export default async function LoginPage({
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
         Ainda não tem conta?{" "}
-        <Link href="/grupo-de-oracao/cadastro" className="text-accent hover:underline">
+        <Link
+          href={`/grupo-de-oracao/cadastro?next=${encodeURIComponent(next)}`}
+          className="text-accent hover:underline"
+        >
           Cadastre-se
         </Link>
       </p>

@@ -33,7 +33,7 @@ export default async function GrupoOracaoEstadoPage({
   if (!nome) notFound();
 
   const member = await getCurrentMember();
-  if (!member || member.status !== "approved") {
+  if (!member || member.grupo_oracao_status !== "approved") {
     redirect("/grupo-de-oracao");
   }
 
