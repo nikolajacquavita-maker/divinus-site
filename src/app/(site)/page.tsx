@@ -106,13 +106,6 @@ export default async function HomePage() {
           >
             Você não precisa correr sozinho →
           </Link>
-
-          <Link
-            href="/produtos"
-            className="mt-10 border border-deep-foreground/30 px-6 py-3 text-xs label-caps text-deep-foreground/90 hover:border-deep-foreground transition-colors"
-          >
-            Explore os produtos
-          </Link>
         </div>
       </section>
 
@@ -186,6 +179,18 @@ export default async function HomePage() {
         </div>
       </section>
       )}
+
+      {/* EXPLORE OS PRODUTOS */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-20">
+          <Link
+            href="/produtos"
+            className="inline-block border border-accent px-6 py-3 text-xs label-caps text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            Explore os produtos
+          </Link>
+        </div>
+      </section>
 
       {/* SENTIMENTOS */}
       <section className="border-t border-border">
