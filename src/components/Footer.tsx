@@ -40,8 +40,11 @@ export function Footer() {
           </p>
         </div>
       </div>
-      <div className="mx-auto max-w-6xl px-6 pb-10 text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Divinus — A mensagem descomplicada de Deus para você.
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 pb-10 text-xs text-muted-foreground">
+        <p>© {new Date().getFullYear()} Divinus — A mensagem descomplicada de Deus para você.</p>
+        <Link href="/politica-de-privacidade" className="hover:text-foreground">
+          Política de Privacidade
+        </Link>
       </div>
     </footer>
   );
