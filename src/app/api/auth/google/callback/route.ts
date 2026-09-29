@@ -14,11 +14,18 @@ export async function GET(request: NextRequest) {
     const response = NextResponse.redirect(
       new URL(`/grupo-de-oracao/login?error=${encodeURIComponent(message)}`, request.url),
     );
+    response.headers.set("Cache-Control", "no-store, must-revalidate");
     response.cookies.delete("google_oauth_state");
     return response;
   };
 
-  if (!code || !state || !savedState || state !== savedState) {
+  if (!code) {
+    return fail("O Google não retornou um código de autorização.");
+  }
+  if (!savedState) {
+    return fail("Sua sessão de login expirou ou o cookie não chegou. Tente novamente.");
+  }
+  if (!state || state !== savedState) {
     return fail("Não foi possível confirmar o login com o Google.");
   }
 
@@ -27,11 +34,13 @@ export async function GET(request: NextRequest) {
     const profile = await exchangeGoogleCode(code, redirectUri);
     const { error } = await loginWithGoogle(profile.email, profile.name, profile.sub);
     if (error) return fail(error);
-  } catch {
+  } catch (err) {
+    console.error("Google OAuth callback error:", err);
     return fail("Não foi possível entrar com o Google.");
   }
 
   const response = NextResponse.redirect(new URL("/grupo-de-oracao", request.url));
+  response.headers.set("Cache-Control", "no-store, must-revalidate");
   response.cookies.delete("google_oauth_state");
   return response;
 }

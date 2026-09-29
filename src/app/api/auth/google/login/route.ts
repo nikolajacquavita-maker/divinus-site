@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
   const state = crypto.randomUUID();
 
   const response = NextResponse.redirect(buildGoogleAuthUrl(redirectUri, state));
+  response.headers.set("Cache-Control", "no-store, must-revalidate");
   response.cookies.set("google_oauth_state", state, {
     httpOnly: true,
     secure: true,
