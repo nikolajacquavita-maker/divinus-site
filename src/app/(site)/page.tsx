@@ -69,7 +69,7 @@ export default async function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="relative flex min-h-dvh items-center overflow-hidden border-b border-border">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/hero-corredor-estrada.jpg"
@@ -110,27 +110,29 @@ export default async function HomePage() {
       </section>
 
       {/* MOVIMENTO */}
-      <section className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
-        <p className="text-xs label-caps text-accent">Um movimento, não uma loja</p>
-        <h2 className="font-display mt-4 text-3xl md:text-4xl">
-          A Divinus nasceu com um propósito: levar sua mensagem espiritual além
-          das fronteiras, alcançando lugares e corações inatingidos.
-        </h2>
-        <p className="mt-6 text-muted-foreground">
-          Na água que você bebe. Na roupa que você veste. No esporte. Na rotina. Nos
-          momentos em que você mais precisa lembrar quem você é.
-        </p>
-        <p className="mt-2 text-muted-foreground">
-          A Divinus não vende apenas produtos. Vende objetos que carregam uma
-          mensagem.
-        </p>
+      <section className="flex min-h-dvh items-center justify-center">
+        <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
+          <p className="text-xs label-caps text-accent">Um movimento, não uma loja</p>
+          <h2 className="font-display mt-4 text-3xl md:text-4xl">
+            A Divinus nasceu com um propósito: levar sua mensagem espiritual além
+            das fronteiras, alcançando lugares e corações inatingidos.
+          </h2>
+          <p className="mt-6 text-muted-foreground">
+            Na água que você bebe. Na roupa que você veste. No esporte. Na rotina. Nos
+            momentos em que você mais precisa lembrar quem você é.
+          </p>
+          <p className="mt-2 text-muted-foreground">
+            A Divinus não vende apenas produtos. Vende objetos que carregam uma
+            mensagem.
+          </p>
+        </div>
       </section>
 
       {/* UNIVERSOS */}
       {universes.length > 0 && (
-      <section className="border-t border-border">
+      <section className="flex min-h-dvh items-center border-t border-border">
         <div
-          className={`mx-auto grid max-w-6xl gap-px bg-border ${
+          className={`mx-auto grid w-full max-w-6xl gap-px bg-border ${
             universes.length === 1
               ? ""
               : universes.length === 2
@@ -181,7 +183,7 @@ export default async function HomePage() {
       )}
 
       {/* EXPLORE OS PRODUTOS */}
-      <section className="border-t border-border">
+      <section className="flex min-h-dvh items-center justify-center border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-20">
           <Link
             href="/produtos"
@@ -193,7 +195,7 @@ export default async function HomePage() {
       </section>
 
       {/* SENTIMENTOS */}
-      <section className="border-t border-border">
+      <section className="flex min-h-dvh items-center justify-center border-t border-border">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
           <p className="text-xs label-caps text-accent">O que você está sentindo hoje?</p>
           <h2 className="font-display mt-4 text-3xl md:text-4xl">
@@ -210,8 +212,8 @@ export default async function HomePage() {
       </section>
 
       {/* HISTÓRIAS REAIS */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+      <section className="flex min-h-dvh items-center border-t border-border">
+        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-24">
           <p className="text-center text-xs label-caps text-accent">Histórias reais</p>
           <h2 className="font-display mx-auto mt-4 max-w-2xl text-center text-2xl sm:text-3xl">
             O produto é apenas o meio. O verdadeiro produto é a mensagem.
@@ -228,7 +230,7 @@ export default async function HomePage() {
       </section>
 
       {/* PROPÓSITO / QR */}
-      <section className="border-t border-border bg-card">
+      <section className="flex min-h-dvh items-center justify-center border-t border-border bg-card">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-24">
           <h2 className="font-display text-3xl sm:text-4xl">
             O físico abre o digital, e o digital devolve sentido ao físico.
