@@ -121,10 +121,6 @@ export default async function HomePage() {
             Na água que você bebe. Na roupa que você veste. No esporte. Na rotina. Nos
             momentos em que você mais precisa lembrar quem você é.
           </p>
-          <p className="mt-2 text-muted-foreground">
-            A Divinus não vende apenas produtos. Vende objetos que carregam uma
-            mensagem.
-          </p>
         </div>
       </section>
 
