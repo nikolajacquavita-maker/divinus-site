@@ -31,24 +31,6 @@ const UNIVERSE_COPY: Record<
   },
 };
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "Eu comprei uma água no posto e a frase da lata respondeu exatamente ao que eu estava vivendo naquela semana.",
-    author: "Marina, 29 — Belo Horizonte",
-  },
-  {
-    quote:
-      "Corri 21 km com a frase nas costas. No quilômetro 17 eu lembrei que não estava correndo sozinho.",
-    author: "Tiago, 34 — Curitiba",
-  },
-  {
-    quote:
-      "Escaneei a etiqueta da camiseta esperando um site de loja. Encontrei uma oração curta que eu precisava ler.",
-    author: "Ana Clara, 22 — Recife",
-  },
-];
-
 export default async function HomePage() {
   const [water, performance, essentials, heroMessage, visibleUniverses] = await Promise.all([
     getActiveProductsByUniverse("water"),
@@ -208,20 +190,11 @@ export default async function HomePage() {
       </section>
 
       {/* HISTÓRIAS REAIS */}
-      <section className="flex min-h-dvh items-center border-t border-border">
-        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-24">
-          <p className="text-center text-xs label-caps text-accent">Histórias reais</p>
-          <h2 className="font-display mx-auto mt-4 max-w-2xl text-center text-2xl sm:text-3xl">
+      <section className="flex min-h-dvh items-center justify-center border-t border-border">
+        <div className="mx-auto max-w-2xl px-6 py-16 text-center sm:py-24">
+          <h2 className="font-display text-2xl sm:text-3xl">
             O produto é apenas o meio. O verdadeiro produto é a mensagem.
           </h2>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <blockquote key={t.author} className="border border-border p-6">
-                <p className="text-sm text-muted-foreground">“{t.quote}”</p>
-                <footer className="mt-4 text-xs label-caps text-accent">{t.author}</footer>
-              </blockquote>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -231,13 +204,6 @@ export default async function HomePage() {
           <h2 className="font-display text-3xl sm:text-4xl">
             O físico abre o digital, e o digital devolve sentido ao físico.
           </h2>
-          <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs label-caps text-muted-foreground">
-            <span>Produto</span>
-            <span>Mensagem</span>
-            <span>Reflexão</span>
-            <span>Comunidade</span>
-            <span>Transformação</span>
-          </div>
         </div>
       </section>
     </>
